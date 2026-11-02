@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lamington Labs</title>
+<meta name="description" content="Lamington Labs is an independent Australian game studio making funny games for your phone. Our first game, Clout Chaser, is coming soon to Google Play.">
+<meta property="og:title" content="Lamington Labs">
+<meta property="og:description" content="We bake funny games. Our first game, Clout Chaser, is coming soon to Google Play.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#2a140b">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Figtree:wght@500;700;800;900&family=Permanent+Marker&display=swap">
+<style>
+/* Layout: a bakery-box label for the studio (chocolate + coconut), then the game's own loud yellow arcade band, then back to the box. */
+:root{
+  --choc:#2a140b; --choc2:#3d1f12; --coco:#fff6e4; --coco2:#f3e6cc; --jam:#e8344f; --sun:#ffd23f; --lab:#3ddc97; --ink:#160b05; --muted:#c9b39a;
+  --f-display:"Bowlby One", "Arial Black", Impact, sans-serif; --f-body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif; --f-hand:"Permanent Marker", "Comic Sans MS", cursive;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--choc);color:var(--coco);font-family:var(--f-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1.02;text-wrap:balance;margin:0}
+.eyebrow{font-weight:900;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase}
+:focus-visible{outline:3px solid var(--sun);outline-offset:3px;border-radius:6px}
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top, 0px);z-index:5;background:rgba(42,20,11,.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,246,228,.08)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:10;background:var(--choc)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:10px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand .cube{width:40px;height:40px}
+.brand b{font-family:var(--f-display);font-weight:400;font-size:1.1rem;letter-spacing:.02em;color:var(--coco)}
+.brand i{font-style:normal;font-family:var(--f-display);font-size:.62rem;background:var(--jam);color:#fff;border-radius:999px;padding:2px 8px 3px;letter-spacing:.2em;margin-left:4px;vertical-align:3px}
+.nav{display:flex;gap:18px;font-weight:800;font-size:.92rem}
+.nav a{text-decoration:none;color:var(--muted)} .nav a:hover{color:var(--coco)}
+/* hero */
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding-block:64px 72px}
+.hero .eyebrow{color:var(--lab)}
+.hero h1{font-size:clamp(2.8rem, 7vw, 5.6rem);color:var(--coco);margin-top:12px;text-shadow:0 0 0 transparent,3px 3px 0 var(--choc2),6px 6px 0 #1a0c06}
+.hero h1 em{font-style:normal;color:var(--jam)}
+.hero p{max-width:34em;color:var(--muted);font-size:1.12rem;margin:20px 0 28px}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-body);font-weight:900;font-size:1rem;text-decoration:none;border-radius:999px;padding:13px 22px;border:3px solid var(--ink);transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.jam{background:var(--jam);color:#fff;box-shadow:4px 4px 0 var(--ink)}
+.btn.ghost{background:transparent;color:var(--coco);border-color:rgba(255,246,228,.35)}
+.btn.sun{background:var(--ink);color:var(--sun);box-shadow:4px 4px 0 rgba(0,0,0,.35)}
+.btn.soon{background:transparent;color:var(--ink);border-style:dashed;cursor:default} .btn.soon:hover{transform:none}
+.cubebox{position:relative;display:grid;place-items:center;aspect-ratio:1;max-width:440px;width:100%;justify-self:center}
+.cubebox::before{content:"";position:absolute;inset:8%;border-radius:50%;background:radial-gradient(circle,rgba(255,214,140,.28),transparent 65%)}
+.cubebox .cube{position:relative;width:78%;animation:bob 3.2s ease-in-out infinite}
+.cubebox .note{position:absolute;right:0;bottom:6%;font-family:var(--f-hand);color:var(--sun);font-size:1.05rem;transform:rotate(-6deg);max-width:12em;text-align:right}
+@keyframes bob{50%{transform:translateY(-10px) rotate(-1.5deg)}}
+.cube svg{width:100%;height:auto;display:block}
+/* game band */
+.game{background:var(--sun);color:var(--ink);border-top:6px solid var(--ink);border-bottom:6px solid var(--ink)}
+.game .wrap{padding-block:64px}
+.gamehead{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.gamehead .eyebrow{color:var(--jam)}
+.logo3d{display:grid;line-height:.86;margin:10px 0 18px}
+.logo3d span{font-family:var(--f-display);font-size:clamp(3rem, 8vw, 5.4rem);color:#fff;-webkit-text-stroke:4px var(--ink);text-shadow:1px 1px 0 var(--ink),2px 2px 0 var(--ink),3px 3px 0 var(--ink),4px 4px 0 var(--ink),5px 5px 0 var(--ink),6px 6px 0 var(--ink),7px 7px 0 var(--ink),8px 8px 0 var(--ink)}
+.logo3d span:last-child{color:var(--jam);transform:rotate(-3deg);transform-origin:left}
+.game p.pitch{font-size:1.15rem;font-weight:700;max-width:30em;margin:0 0 24px}
+.feat{border:4px solid var(--ink);border-radius:20px;box-shadow:10px 10px 0 var(--ink);overflow:hidden;rotate:1.5deg;max-width:100%;transition:rotate .4s cubic-bezier(.34,1.56,.64,1), box-shadow .3s}
+.feat:hover{rotate:-1deg;box-shadow:14px 14px 0 var(--ink)}
+.feat img{display:block;width:100%;height:auto}
+.shots{margin-top:56px}
+.shots h3{font-size:1.5rem;margin-bottom:6px}
+.shots .hint{font-family:var(--f-hand);font-size:1rem;margin:0 0 14px}
+.strip{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 6px 18px;-webkit-overflow-scrolling:touch;scrollbar-width:none;cursor:grab}
+.strip::-webkit-scrollbar{display:none}
+.strip.drag{scroll-snap-type:none;cursor:grabbing;user-select:none}
+.strip.drag img{pointer-events:none}
+.strip figure{flex:0 0 auto;width:min(240px, 62vw);margin:0;scroll-snap-align:start}
+.strip img{display:block;width:100%;height:auto;border:4px solid var(--ink);border-radius:22px;box-shadow:6px 6px 0 var(--ink);background:#fff}
+.strip figcaption{font-weight:800;font-size:.85rem;margin-top:10px}
+/* numbers */
+.inside .wrap{padding-block:72px}
+.inside h2,.cast h2,.about h2{font-size:clamp(2rem, 4.6vw, 3.2rem)}
+.inside .lead{color:var(--muted);max-width:36em;margin:12px 0 36px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.num{background:var(--choc2);border:1px solid rgba(255,246,228,.1);border-radius:18px;padding:22px;display:grid;gap:4px;align-content:start;min-width:0}
+.num b{font-family:var(--f-display);font-weight:400;font-size:3rem;line-height:1;color:var(--sun);font-variant-numeric:tabular-nums}
+.num span{font-weight:900;font-size:1.05rem}
+.num p{margin:6px 0 0;color:var(--muted);font-size:.95rem}
+.num:nth-child(3n+2) b{color:var(--lab)} .num:nth-child(3n) b{color:#ff8fa3}
+/* cast */
+.cast{background:var(--coco);color:var(--ink)}
+.cast .wrap{padding-block:72px}
+.cast .lead{max-width:36em;margin:12px 0 32px;color:#6b4a33}
+.people{display:grid;grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));gap:24px 18px}
+.person{display:grid;justify-items:center;text-align:center;gap:6px}
+.person .av{width:118px;height:118px;border-radius:50%;border:4px solid var(--ink);overflow:hidden;box-shadow:5px 5px 0 var(--ink)}
+.person:nth-child(odd) .av{rotate:-4deg} .person:nth-child(even) .av{rotate:3deg}
+.person:hover .av{animation:wobble .6s ease}
+.person .av svg{width:100%;height:100%;display:block}
+.person b{font-weight:900;margin-top:8px}
+.person small{font-size:.88rem;color:#6b4a33;line-height:1.35;max-width:14em}
+.pets{display:flex;justify-content:center;align-items:flex-end;gap:28px;margin-top:40px;flex-wrap:wrap}
+.pets div{display:grid;justify-items:center;gap:4px;font-family:var(--f-hand);font-size:1rem}
+.pets svg{width:110px;height:auto}
+/* about */
+.about .wrap{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;padding-block:72px}
+.about .cube{width:min(220px, 50vw)}
+.about p{color:var(--muted);max-width:38em;margin:14px 0 0}
+.about .hand{font-family:var(--f-hand);color:var(--sun);font-size:1.15rem;margin-top:18px}
+footer{border-top:1px solid rgba(255,246,228,.1)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-block:28px;color:var(--muted);font-size:.88rem}
+@media (max-width:820px){
+  .hero .wrap,.gamehead,.about .wrap{grid-template-columns:1fr}
+  .hero .wrap{padding-block:40px 48px;gap:20px} .cubebox{max-width:300px;order:-1}
+  .grid{grid-template-columns:1fr 1fr} .about .cube{justify-self:center} .nav{display:none}
+}
+@media (max-width:520px){ .grid{grid-template-columns:1fr} .person .av{width:96px;height:96px} }
+@media (prefers-reduced-motion:reduce){ .cubebox .cube{animation:none} .btn{transition:none} }
+
+/* games index: one card per game; add a game = add a card + an <article class="gamepage"> */
+.games .wrap{padding-block:16px 72px}
+.games h2{font-size:clamp(2rem, 4.6vw, 3.2rem);margin-bottom:28px}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill, minmax(min(100%, 320px), 1fr));gap:24px}
+.gcard{display:flex;flex-direction:column;background:var(--sun);color:var(--ink);border:4px solid var(--ink);border-radius:22px;overflow:hidden;text-decoration:none;box-shadow:8px 8px 0 #120804;transition:transform .15s}
+a.gcard:hover{transform:translate(-2px,-3px)}
+.gcard img{display:block;width:100%;height:auto;border-bottom:4px solid var(--ink)}
+.gbody{padding:18px 20px 22px;display:grid;gap:8px;align-content:start}
+.gbody h3{font-size:1.9rem}
+.gbody p{margin:0;font-weight:700;font-size:.98rem}
+.chip{justify-self:start;font-weight:900;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--sun);border-radius:999px;padding:4px 10px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font-weight:800;font-size:.8rem;border:2px solid var(--ink);border-radius:999px;padding:2px 10px}
+.more{font-weight:900;color:var(--jam);margin-top:4px}
+.gcard.next{background:transparent;color:var(--coco);border:3px dashed rgba(255,246,228,.3);box-shadow:none}
+.gcard.next .ph{aspect-ratio:1024/500;display:grid;place-items:center;border-bottom:3px dashed rgba(255,246,228,.2);background:var(--choc2)}
+.gcard.next .cube{width:34%;filter:grayscale(1) brightness(.55);opacity:.7}
+.gcard.next .chip{background:rgba(255,246,228,.12);color:var(--muted)}
+.gcard.next p{color:var(--muted);font-weight:600}
+.back{display:inline-block;font-weight:900;font-size:.88rem;text-decoration:none;margin-bottom:14px;border-bottom:2px solid currentColor}
+.gamepage{scroll-margin-top:60px}
+@media (prefers-reduced-motion:reduce){ .gcard{transition:none} }
+
+/* ---------- motion ---------- */
+html{scrollbar-color:var(--jam) var(--choc)}
+::selection{background:var(--jam);color:#fff}
+.top::after{content:"";position:absolute;left:0;bottom:-1px;height:3px;width:100%;transform-origin:left;transform:scaleX(var(--sp,0));background:linear-gradient(90deg,var(--lab),var(--sun),var(--jam))}
+.top{transition:box-shadow .3s} .top.scrolled{box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.brand .cube{transition:rotate .5s cubic-bezier(.34,1.56,.64,1)} .brand:hover .cube{rotate:-14deg}
+.lameyes{transform-box:fill-box;transform-origin:center;animation:blink 5s infinite}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+/* hero intro */
+.intro .w{display:inline-block;animation:rise .9s cubic-bezier(.2,1.4,.4,1) both;animation-delay:calc(.15s + var(--i)*.12s)}
+@keyframes rise{from{opacity:0;transform:translateY(60%) rotate(6deg) scale(.9)}}
+.jelly{display:inline-block;animation:jelly 3.5s 1.6s ease-in-out infinite;transform-origin:50% 90%}
+@keyframes jelly{0%,70%,100%{transform:none}75%{transform:scale(1.12,.86)}80%{transform:scale(.9,1.1) rotate(-3deg)}86%{transform:scale(1.05,.96) rotate(2deg)}92%{transform:scale(.98,1.02)}}
+.fadein{animation:fadeup .8s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(.2s + var(--i)*.12s)}
+@keyframes fadeup{from{opacity:0;transform:translateY(18px)}}
+.cubebox{transition:transform .4s ease-out;transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));animation:dropin 1.1s .3s cubic-bezier(.2,1.5,.4,1) both}
+@keyframes dropin{from{opacity:0;transform:translateY(-80px) scale(.7) rotate(-12deg)}}
+.cubebox .note{animation:fadeup .8s 1.2s both}
+.sprinkles{position:absolute;inset:-6% 0 0;pointer-events:none;overflow:hidden;-webkit-mask:linear-gradient(#000 70%,transparent);mask:linear-gradient(#000 70%,transparent)}
+.sprinkles i{position:absolute;top:-20px;width:5px;height:12px;border-radius:3px;background:var(--c);animation:fall var(--t) linear var(--d) infinite;opacity:.9}
+@keyframes fall{to{transform:translate(var(--x),520px) rotate(var(--r))}}
+/* ticker */
+.ticker{overflow:hidden;padding:26px 0 30px}
+.tband{background:var(--jam);border-block:4px solid var(--ink);rotate:-2deg;width:110%;margin-left:-5%;box-shadow:0 8px 0 rgba(0,0,0,.25)}
+.ttrack{display:flex;width:max-content;animation:marquee 26s linear infinite}
+.ttrack span{font-family:var(--f-display);font-size:clamp(1.1rem,2.6vw,1.6rem);color:#fff;white-space:nowrap;padding:10px 0;letter-spacing:.03em}
+.ticker:hover .ttrack{animation-play-state:paused}
+@keyframes marquee{to{transform:translateX(-50%)}}
+/* scroll reveal (only when JS is running) */
+.js .rv{opacity:0;transform:translateY(34px);transition:opacity .75s cubic-bezier(.2,.7,.2,1) var(--d,0s),transform .75s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
+.js .rv.pop{transform:scale(.5) translateY(30px);transition-timing-function:ease,cubic-bezier(.34,1.7,.64,1)}
+.js .rv.left{transform:translateX(-50px)} .js .rv.right{transform:translateX(50px) rotate(4deg)}
+.js .rv.in{opacity:1;transform:none}
+/* cards */
+.gcard{will-change:transform;transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--ty,0px))}
+.js .gcard.rv{transform:translateY(40px)} .js .gcard.rv.in{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--ty,0px))}
+.gcard.hot{transition:transform .08s linear,opacity .75s} a.gcard:hover{--ty:-4px}
+.gcard img{transition:transform .5s cubic-bezier(.2,.7,.2,1)} a.gcard:hover img{transform:scale(1.05)}
+.gcard{position:relative} .gcard::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.35),transparent 45%);opacity:0;transition:opacity .3s;pointer-events:none}
+a.gcard:hover::after{opacity:1}
+.more{display:inline-block;transition:transform .2s} a.gcard:hover .more{transform:translateX(6px)}
+.gcard.next .cube{animation:bob 3.2s ease-in-out infinite}
+.live{width:9px;height:9px;border-radius:50%;background:var(--lab);box-shadow:0 0 0 0 rgba(61,220,151,.7);animation:pulse 1.8s infinite;display:inline-block}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(61,220,151,0)}100%{box-shadow:0 0 0 0 rgba(61,220,151,0)}}
+.btn.jam:hover{animation:wobble .5s}
+@keyframes wobble{25%{rotate:-6deg}50%{rotate:5deg}75%{rotate:-2deg}}
+/* carousel */
+.shead{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:14px}
+.shead h3{margin:0}
+.arrows{display:flex;gap:10px}
+.arr{width:48px;height:48px;border-radius:50%;border:3px solid var(--ink);background:#fff;color:var(--ink);font:900 1.3rem/1 var(--f-body);cursor:pointer;box-shadow:3px 3px 0 var(--ink);transition:transform .15s,box-shadow .15s,background .2s,opacity .2s}
+.arr:hover{background:var(--jam);color:#fff} .arr:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--ink)}
+.arr:disabled{opacity:.35;cursor:default;background:#fff;color:var(--ink)}
+.strip figure{transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.strip figure:hover{transform:translateY(-8px) rotate(-1.5deg)}
+.prog{height:10px;border:3px solid var(--ink);border-radius:999px;background:#fff;overflow:hidden;margin:4px 6px 0}
+.prog i{display:block;height:100%;width:var(--w,30%);margin-left:var(--l,0%);background:var(--jam);border-radius:999px;transition:margin-left .12s linear}
+/* numbers + cast + pets */
+.num{transition:transform .3s cubic-bezier(.34,1.56,.64,1),border-color .3s}
+.num:hover{transform:translateY(-6px);border-color:rgba(255,210,63,.5)}
+.pets div:first-child svg{animation:bob 2.4s ease-in-out infinite}
+.pets div:last-child svg{transform-origin:50% 100%;animation:peck 3s ease-in-out infinite}
+@keyframes peck{0%,60%,100%{rotate:0deg}68%{rotate:12deg}74%{rotate:2deg}80%{rotate:12deg}88%{rotate:0deg}}
+.about .cube{animation:bob 3.6s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .rv{opacity:1;transform:none} .sprinkles{display:none}
+}
+</style>
+
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="#top" aria-label="Lamington Labs home"><span class="cube"><svg viewBox="0 0 200 200" class="lamsvg" aria-hidden="true">
+      <defs><clipPath id="lamCL"><polygon points="27,64 97,99 97,178 27,142"/></clipPath><clipPath id="lamCT"><polygon points="100,26 171,60 100,94 29,60"/></clipPath></defs>
+      <polygon points="24,60 100,98 100,182 24,144" fill="#5a2f1c" stroke="#120a06" stroke-width="5" stroke-linejoin="round"/>
+      <g clip-path="url(#lamCL)"><rect x="69.7" y="120.5" width="6.4" height="2.7" rx="1" fill="#fff6e4" transform="rotate(31 69.7 120.5)"/><rect x="64.0" y="103.0" width="5.5" height="3.0" rx="1" fill="#fff6e4" transform="rotate(85 64.0 103.0)"/><rect x="43.0" y="143.6" width="6.0" height="2.1" rx="1" fill="#fff6e4" transform="rotate(36 43.0 143.6)"/><rect x="62.1" y="136.7" width="5.4" height="1.6" rx="1" fill="#fff6e4" transform="rotate(85 62.1 136.7)"/><rect x="87.6" y="96.1" width="5.4" height="1.7" rx="1" fill="#fff6e4" transform="rotate(48 87.6 96.1)"/><rect x="28.7" y="77.9" width="6.1" height="2.4" rx="1" fill="#fff6e4" transform="rotate(5 28.7 77.9)"/><rect x="37.1" y="137.4" width="5.0" height="2.9" rx="1" fill="#fff6e4" transform="rotate(58 37.1 137.4)"/><rect x="58.2" y="80.2" width="3.2" height="2.5" rx="1" fill="#fff6e4" transform="rotate(107 58.2 80.2)"/><rect x="42.6" y="123.6" width="3.8" height="2.1" rx="1" fill="#fff6e4" transform="rotate(133 42.6 123.6)"/><rect x="89.3" y="135.3" width="3.8" height="2.1" rx="1" fill="#fff6e4" transform="rotate(53 89.3 135.3)"/><rect x="29.7" y="118.3" width="5.7" height="2.7" rx="1" fill="#fff6e4" transform="rotate(167 29.7 118.3)"/><rect x="30.7" y="142.6" width="4.7" height="3.1" rx="1" fill="#fff6e4" transform="rotate(25 30.7 142.6)"/><rect x="32.4" y="65.5" width="4.4" height="2.4" rx="1" fill="#fff6e4" transform="rotate(110 32.4 65.5)"/><rect x="92.4" y="100.7" width="5.9" height="3.1" rx="1" fill="#fff6e4" transform="rotate(50 92.4 100.7)"/><rect x="77.7" y="101.9" width="5.1" height="2.9" rx="1" fill="#fff6e4" transform="rotate(22 77.7 101.9)"/><rect x="99.7" y="145.1" width="6.7" height="2.3" rx="1" fill="#fff6e4" transform="rotate(104 99.7 145.1)"/><rect x="49.6" y="122.9" width="4.3" height="2.8" rx="1" fill="#fff6e4" transform="rotate(53 49.6 122.9)"/><rect x="58.2" y="147.9" width="5.8" height="3.2" rx="1" fill="#fff6e4" transform="rotate(160 58.2 147.9)"/><rect x="56.8" y="122.2" width="4.2" height="1.8" rx="1" fill="#fff6e4" transform="rotate(125 56.8 122.2)"/><rect x="47.8" y="137.9" width="6.6" height="1.7" rx="1" fill="#fff6e4" transform="rotate(86 47.8 137.9)"/><rect x="86.5" y="102.2" width="6.9" height="1.9" rx="1" fill="#fff6e4" transform="rotate(128 86.5 102.2)"/><rect x="77.2" y="105.3" width="4.7" height="1.9" rx="1" fill="#fff6e4" transform="rotate(118 77.2 105.3)"/><rect x="49.5" y="90.1" width="5.5" height="3.0" rx="1" fill="#fff6e4" transform="rotate(59 49.5 90.1)"/><rect x="84.2" y="123.1" width="3.5" height="3.0" rx="1" fill="#fff6e4" transform="rotate(67 84.2 123.1)"/><rect x="24.7" y="122.3" width="5.5" height="3.0" rx="1" fill="#fff6e4" transform="rotate(163 24.7 122.3)"/><rect x="39.9" y="118.7" width="5.0" height="1.9" rx="1" fill="#fff6e4" transform="rotate(9 39.9 118.7)"/><rect x="77.6" y="146.3" width="4.2" height="2.0" rx="1" fill="#fff6e4" transform="rotate(61 77.6 146.3)"/><rect x="26.2" y="79.7" width="7.0" height="2.5" rx="1" fill="#fff6e4" transform="rotate(178 26.2 79.7)"/><rect x="36.5" y="80.6" width="5.2" height="2.1" rx="1" fill="#fff6e4" transform="rotate(71 36.5 80.6)"/><rect x="57.0" y="111.6" width="5.7" height="2.2" rx="1" fill="#fff6e4" transform="rotate(61 57.0 111.6)"/><rect x="92.1" y="121.5" width="5.0" height="2.6" rx="1" fill="#fff6e4" transform="rotate(98 92.1 121.5)"/><rect x="68.8" y="102.2" width="4.3" height="2.1" rx="1" fill="#fff6e4" transform="rotate(58 68.8 102.2)"/><rect x="74.9" y="104.0" width="3.7" height="2.7" rx="1" fill="#fff6e4" transform="rotate(57 74.9 104.0)"/><rect x="33.5" y="91.1" width="3.2" height="2.5" rx="1" fill="#fff6e4" transform="rotate(37 33.5 91.1)"/></g>
+      <polygon points="100,98 176,60 176,144 100,182" fill="#3d1f12" stroke="#120a06" stroke-width="5" stroke-linejoin="round"/>
+      <polygon points="108,104 168,74 168,138 108,168" fill="#f5d48f"/>
+      <polygon points="108,128 168,98 168,112 108,142" fill="#e8344f"/>
+      <path d="M118 112 l3 0 M140 92 l4 1 M150 128 l3 -1 M126 150 l2 2 M156 86 l2 1" stroke="#d9b06a" stroke-width="3" stroke-linecap="round"/>
+      <polygon points="100,22 176,60 100,98 24,60" fill="#6b3a22" stroke="#120a06" stroke-width="5" stroke-linejoin="round"/>
+      <g clip-path="url(#lamCT)"><rect x="107.7" y="54.7" width="5.8" height="3.1" rx="1" fill="#fff6e4" transform="rotate(146 107.7 54.7)"/><rect x="121.7" y="44.6" width="6.5" height="2.4" rx="1" fill="#fff6e4" transform="rotate(151 121.7 44.6)"/><rect x="133.8" y="73.1" width="3.6" height="2.6" rx="1" fill="#fff6e4" transform="rotate(145 133.8 73.1)"/><rect x="86.2" y="44.7" width="5.2" height="3.2" rx="1" fill="#fff6e4" transform="rotate(89 86.2 44.7)"/><rect x="101.2" y="86.7" width="6.0" height="1.7" rx="1" fill="#fff6e4" transform="rotate(12 101.2 86.7)"/><rect x="74.4" y="47.7" width="5.7" height="2.8" rx="1" fill="#fff6e4" transform="rotate(178 74.4 47.7)"/><rect x="114.0" y="77.0" width="6.3" height="3.0" rx="1" fill="#fff6e4" transform="rotate(108 114.0 77.0)"/><rect x="92.7" y="52.3" width="6.5" height="2.7" rx="1" fill="#fff6e4" transform="rotate(63 92.7 52.3)"/><rect x="123.7" y="81.4" width="4.3" height="3.0" rx="1" fill="#fff6e4" transform="rotate(27 123.7 81.4)"/><rect x="126.3" y="36.7" width="3.3" height="2.6" rx="1" fill="#fff6e4" transform="rotate(131 126.3 36.7)"/><rect x="105.8" y="91.7" width="4.9" height="2.7" rx="1" fill="#fff6e4" transform="rotate(26 105.8 91.7)"/><rect x="110.2" y="37.7" width="3.2" height="2.1" rx="1" fill="#fff6e4" transform="rotate(79 110.2 37.7)"/><rect x="88.8" y="70.8" width="6.2" height="2.9" rx="1" fill="#fff6e4" transform="rotate(35 88.8 70.8)"/><rect x="111.3" y="67.0" width="4.8" height="2.4" rx="1" fill="#fff6e4" transform="rotate(83 111.3 67.0)"/><rect x="107.1" y="50.8" width="4.2" height="1.8" rx="1" fill="#fff6e4" transform="rotate(91 107.1 50.8)"/><rect x="80.0" y="52.3" width="5.2" height="2.6" rx="1" fill="#fff6e4" transform="rotate(79 80.0 52.3)"/><rect x="110.0" y="27.3" width="3.6" height="3.1" rx="1" fill="#fff6e4" transform="rotate(12 110.0 27.3)"/><rect x="133.5" y="71.4" width="5.0" height="1.8" rx="1" fill="#fff6e4" transform="rotate(148 133.5 71.4)"/><rect x="76.1" y="38.2" width="3.9" height="2.7" rx="1" fill="#fff6e4" transform="rotate(102 76.1 38.2)"/><rect x="33.7" y="62.3" width="6.0" height="2.7" rx="1" fill="#fff6e4" transform="rotate(143 33.7 62.3)"/><rect x="80.5" y="73.4" width="5.1" height="1.9" rx="1" fill="#fff6e4" transform="rotate(14 80.5 73.4)"/><rect x="102.8" y="27.9" width="4.1" height="2.7" rx="1" fill="#fff6e4" transform="rotate(120 102.8 27.9)"/><rect x="68.4" y="80.4" width="3.1" height="2.2" rx="1" fill="#fff6e4" transform="rotate(61 68.4 80.4)"/><rect x="58.3" y="64.5" width="5.1" height="1.9" rx="1" fill="#fff6e4" transform="rotate(170 58.3 64.5)"/><rect x="152.1" y="68.3" width="5.1" height="3.0" rx="1" fill="#fff6e4" transform="rotate(168 152.1 68.3)"/><rect x="108.8" y="69.6" width="6.2" height="2.1" rx="1" fill="#fff6e4" transform="rotate(89 108.8 69.6)"/><rect x="115.2" y="71.4" width="5.7" height="2.5" rx="1" fill="#fff6e4" transform="rotate(98 115.2 71.4)"/><rect x="98.7" y="96.1" width="6.1" height="2.1" rx="1" fill="#fff6e4" transform="rotate(114 98.7 96.1)"/><rect x="85.0" y="80.2" width="4.5" height="3.0" rx="1" fill="#fff6e4" transform="rotate(57 85.0 80.2)"/><rect x="135.5" y="71.1" width="4.4" height="2.5" rx="1" fill="#fff6e4" transform="rotate(151 135.5 71.1)"/></g>
+      <g class="lameyes"><ellipse cx="50" cy="104" rx="7" ry="9" fill="#fff"/><ellipse cx="78" cy="118" rx="7" ry="9" fill="#fff"/><circle cx="52" cy="106" r="4" fill="#120a06"/><circle cx="80" cy="120" r="4" fill="#120a06"/></g>
+      <path d="M52 128 Q64 140 78 134" stroke="#fff6e4" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <ellipse cx="40" cy="120" rx="6" ry="4" fill="#ff7b93" opacity=".7"/><ellipse cx="90" cy="140" rx="6" ry="4" fill="#ff7b93" opacity=".7"/>
+    </svg></span><b>LAMINGTON<i>LABS</i></b></a>
+  <nav class="nav" aria-label="Sections"><a href="#games">Games</a><a href="#studio">Studio</a></nav>
+</div></header>
+
+<main id="top">
+<section class="hero"><div class="wrap">
+  <div>
+    <div class="eyebrow fadein" style="--i:0">Independent game studio · Australia</div>
+    <h1 class="intro"><span class="w" style="--i:0">We</span> <span class="w" style="--i:1">bake</span> <em class="w" style="--i:2"><span class="jelly">funny</span></em> <span class="w" style="--i:3">games.</span></h1>
+    <p class="fadein" style="--i:4">Lamington Labs is a tiny studio making chunky, colourful, slightly unhinged games for your phone. Chocolate on the outside, jam in the middle, coconut everywhere.</p>
+    <div class="btns fadein" style="--i:5"><a class="btn jam" href="#games">See our games</a><a class="btn ghost" href="#studio">About the lab</a></div>
+  </div>
+  <div class="cubebox" aria-hidden="true"><div class="sprinkles"></div><span class="cube"><svg viewBox="0 0 200 200" class="lamsvg" aria-hidden="true">
+      <defs><clipPath id="lamCL"><polygon points="27,64 97,99 97,178 27,142"/></clipPath><clipPath id="lamCT"><polygon points="100,26 171,60 100,94 29,60"/></clipPath></defs>
+      <polygon points="24,60 100,98 100,182 24,144" fill="#5a2f1c" stroke="#120a06" stroke-width="5" stroke-linejoin="round"/>
+      <g clip-path="url(#lamCL)"><rect x="69.7" y="120.5" width="6.4" height="2.7" rx="1" fill="#fff6e4" transform="rotate(31 69.7 120.5)"/><rect x="64.0" y="103.0" width="5.5" height="3.0" rx="1" fill="#fff6e4" transform="rotate(85 64.0 103.0)"/><rect x="43.0" y="143.6" width="6.0" height="2.1" rx="1" fill="#fff6e4" transform="rotate(36 43.0 143.6)"/><rect x="62.1" y="136.7" width="5.4" height="1.6" rx="1" fill="#fff6e4" transform="rotate(85 62.1 136.7)"/><rect x="87.6" y="96.1" width="5.4" height="1.7" rx="1" fill="#fff6e4" transform="rotate(48 87.6 96.1)"/><rect x="28.7" y="77.9" width="6.1" height="2.4" rx="1" fill="#fff6e4" transform="rotate(5 28.7 77.9)"/><rect x="37.1" y="137.4" width="5.0" height="2.9" rx="1" fill="#fff6e4" transform="rotate(58 37.1 137.4)"/><rect x="58.2" y="80.2" width="3.2" height="2.5" rx="1" fill="#fff6e4" transform="rotate(107 58.2 80.2)"/><rect x="42.6" y="123.6" width="3.8" height="2.1" rx="1" fill="#fff6e4" transform="rotate(133 42.6 123.6)"/><rect x="89.3" y="135.3" width="3.8" height="2.1" rx="1" fill="#fff6e4" transform="rotate(53 89.3 135.3)"/><rect x="29.7" y="118.3" width="5.7" height="2.7" rx="1" fill="#fff6e4" transform="rotate(167 29.7 118.3)"/><rect x="30.7" y="142.6" width="4.7" height="3.1" rx="1" fill="#fff6e4" transform="rotate(25 30.7 142.6)"/><rect x="32.4" y="65.5" width="4.4" height="2.4" rx="1" fill="#fff6e4" transform="rotate(110 32.4 65.5)"/><rect x="92.4" y="100.7" width="5.9" height="3.1" rx="1" fill="#fff6e4" transform="rotate(50 92.4 100.7)"/><rect x="77.7" y="101.9" width="5.1" height="2.9" rx="1" fill="#fff6e4" transform="rotate(22 77.7 101.9)"/><rect x="99.7" y="145.1" width="6.7" height="2.3" rx="1" fill="#fff6e4" transform="rotate(104 99.7 145.1)"/><rect x="49.6" y="122.9" width="4.3" height="2.8" rx="1" fill="#fff6e4" transform="rotate(53 49.6 122.9)"/><rect x="58.2" y="147.9" width="5.8" height="3.2" rx="1" fill="#fff6e4" transform="rotate(160 58.2 147.9)"/><rect x="56.8" y="122.2" width="4.2" height="1.8" rx="1" fill="#fff6e4" transform="rotate(125 56.8 122.2)"/><rect x="47.8" y="137.9" width="6.6" height="1.7" rx="1" fill="#fff6e4" transform="rotate(86 47.8 137.9)"/><rect x="86.5" y="102.2" width="6.9" height="1.9" rx="1" fill="#fff6e4" transform="rotate(128 86.5 102.2)"/><rect x="77.2" y="105.3" width="4.7" height="1.9" rx="1" fill="#fff6e4" transform="rotate(118 77.2 105.3)"/><rect x="49.5" y="90.1" width="5.5" height="3.0" rx="1" fill="#fff6e4" transform="rotate(59 49.5 90.1)"/><rect x="84.2" y="123.1" width="3.5" height="3.0" rx="1" fill="#fff6e4" transform="rotate(67 84.2 123.1)"/><rect x="24.7" y="122.3" width="5.5" height="3.0" rx="1" fill="#fff6e4" transform="rotate(163 24.7 122.3)"/><rect x="39.9" y="118.7" width="5.0" height="1.9" rx="1" fill="#fff6e4" transform="rotate(9 39.9 118.7)"/><rect x="77.6" y="146.3" width="4.2" height="2.0" rx="1" fill="#fff6e4" transform="rotate(61 77.6 146.3)"/><rect x="26.2" y="79.7" width="7.0" height="2.5" rx="1" fill="#fff6e4" transform="rotate(178 26.2 79.7)"/><rect x="36.5" y="80.6" width="5.2" height="2.1" rx="1" fill="#fff6e4" transform="rotate(71 36.5 80.6)"/><rect x="57.0" y="111.6" width="5.7" height="2.2" rx="1" fill="#fff6e4" transform="rotate(61 57.0 111.6)"/><rect x="92.1" y="121.5" width="5.0" height="2.6" rx="1" fill="#fff6e4" transform="rotate(98 92.1 121.5)"/><rect x="68.8" y="102.2" width="4.3" height="2.1" rx="1" fill="#fff6e4" transform="rotate(58 68.8 102.2)"/><rect x="74.9" y="104.0" width="3.7" height="2.7" rx="1" fill="#fff6e4" transform="rotate(57 74.9 104.0)"/><rect x="33.5" y="91.1" width="3.2" height="2.5" rx="1" fill="#fff6e4" transform="rotate(37 33.5 91.1)"/></g>
+      <polygon points="100,98 176,60 176,144 100,182" fill="#3d1f12" stroke="#120a06" stroke-width="5" stroke-linejoin="round"/>
+      <polygon points="108,104 168,74 168,138 108,168" fill="#f5d48f"/>
+      <polygon points="108,128 168,98 168,112 108,142" fill="#e8344f"/>
+      <path d="M118 112 l3 0 M140 92 l4 1 M150 128 l3 -1 M126 150 l2 2 M156 86 l2 1" stroke="#d9b06a" stroke-width="3" stroke-linecap="round"/>
+      <polygon points="100,22 176,60 100,98 24,60" fill="#6b3a22" stroke="#120a06" stroke-width="5" stroke-linejoin="round"/>
+      <g clip-path="url(#lamCT)"><rect x="107.7" y="54.7" width="5.8" height="3.1" rx="1" fill="#fff6e4" transform="rotate(146 107.7 54.7)"/><rect x="121.7" y="44.6" width="6.5" height="2.4" rx="1" fill="#fff6e4" transform="rotate(151 121.7 44.6)"/><rect x="133.8" y="73.1" width="3.6" height="2.6" rx="1" fill="#fff6e4" transform="rotate(145 133.8 73.1)"/><rect x="86.2" y="44.7" width="5.2" height="3.2" rx="1" fill="#fff6e4" transform="rotate(89 86.2 44.7)"/><rect x="101.2" y="86.7" width="6.0" height="1.7" rx="1" fill="#fff6e4" transform="rotate(12 101.2 86.7)"/><rect x="74.4" y="47.7" width="5.7" height="2.8" rx="1" fill="#fff6e4" transform="rotate(178 74.4 47.7)"/><rect x="114.0" y="77.0" width="6.3" height="3.0" rx="1" fill="#fff6e4" transform="rotate(108 114.0 77.0)"/><rect x="92.7" y="52.3" width="6.5" height="2.7" rx="1" fill="#fff6e4" transform="rotate(63 92.7 52.3)"/><rect x="123.7" y="81.4" width="4.3" height="3.0" rx="1" fill="#fff6e4" transform="rotate(27 123.7 81.4)"/><rect x="126.3" y="36.7" width="3.3" height="2.6" rx="1" fill="#fff6e4" transform="rotate(131 126.3 36.7)"/><rect x="105.8" y="91.7" width="4.9" height="2.7" rx="1" fill="#fff6e4" transform="rotate(26 105.8 91.7)"/><rect x="110.2" y="37.7" width="3.2" height="2.1" rx="1" fill="#fff6e4" transform="rotate(79 110.2 37.7)"/><rect x="88.8" y="70.8" width="6.2" height="2.9" rx="1" fill="#fff6e4" transform="rotate(35 88.8 70.8)"/><rect x="111.3" y="67.0" width="4.8" height="2.4" rx="1" fill="#fff6e4" transform="rotate(83 111.3 67.0)"/><rect x="107.1" y="50.8" width="4.2" height="1.8" rx="1" fill="#fff6e4" transform="rotate(91 107.1 50.8)"/><rect x="80.0" y="52.3" width="5.2" height="2.6" rx="1" fill="#fff6e4" transform="rotate(79 80.0 52.3)"/><rect x="110.0" y="27.3" width="3.6" height="3.1" rx="1" fill="#fff6e4" transform="rotate(12 110.0 27.3)"/><rect x="133.5" y="71.4" width="5.0" height="1.8" rx="1" fill="#fff6e4" transform="rotate(148 133.5 71.4)"/><rect x="76.1" y="38.2" width="3.9" height="2.7" rx="1" fill="#fff6e4" transform="rotate(102 76.1 38.2)"/><rect x="33.7" y="62.3" width="6.0" height="2.7" rx="1" fill="#fff6e4" transform="rotate(143 33.7 62.3)"/><rect x="80.5" y="73.4" width="5.1" height="1.9" rx="1" fill="#fff6e4" transform="rotate(14 80.5 73.4)"/><rect x="102.8" y="27.9" width="4.1" height="2.7" rx="1" fill="#fff6e4" transform="rotate(120 102.8 27.9)"/><rect x="68.4" y="80.4" width="3.1" height="2.2" rx="1" fill="#fff6e4" transform="rotate(61 68.4 80.4)"/><rect x="58.3" y="64.5" width="5.1" height="1.9" rx="1" fill="#fff6e4" transform="rotate(170 58.3 64.5)"/><rect x="152.1" y="68.3" width="5.1" height="3.0" rx="1" fill="#fff6e4" transform="rotate(168 152.1 68.3)"/><rect x="108.8" y="69.6" width="6.2" height="2.1" rx="1" fill="#fff6e4" transform="rotate(89 108.8 69.6)"/><rect x="115.2" y="71.4" width="5.7" height="2.5" rx="1" fill="#fff6e4" transform="rotate(98 115.2 71.4)"/><rect x="98.7" y="96.1" width="6.1" height="2.1" rx="1" fill="#fff6e4" transform="rotate(114 98.7 96.1)"/><rect x="85.0" y="80.2" width="4.5" height="3.0" rx="1" fill="#fff6e4" transform="rotate(57 85.0 80.2)"/><rect x="135.5" y="71.1" width="4.4" height="2.5" rx="1" fill="#fff6e4" transform="rotate(151 135.5 71.1)"/></g>
+      <g class="lameyes"><ellipse cx="50" cy="104" rx="7" ry="9" fill="#fff"/><ellipse cx="78" cy="118" rx="7" ry="9" fill="#fff"/><circle cx="52" cy="106" r="4" fill="#120a06"/><circle cx="80" cy="120" r="4" fill="#120a06"/></g>
+      <path d="M52 128 Q64 140 78 134" stroke="#fff6e4" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <ellipse cx="40" cy="120" rx="6" ry="4" fill="#ff7b93" opacity=".7"/><ellipse cx="90" cy="140" rx="6" ry="4" fill="#ff7b93" opacity=".7"/>
+    </svg></span><span class="note">fresh out of the oven</span></div>
+</div></section>
+
+<div class="ticker" aria-hidden="true"><div class="tband"><div class="ttrack"><span>FUNNY GAMES ✦ FRESH OUT OF THE OVEN ✦ BEST WITH A CUPPA ✦ MADE IN AUSTRALIA ✦ 100% SILLY ✦ </span><span>FUNNY GAMES ✦ FRESH OUT OF THE OVEN ✦ BEST WITH A CUPPA ✦ MADE IN AUSTRALIA ✦ 100% SILLY ✦ </span></div></div></div>
+
+<section class="games" id="games"><div class="wrap">
+  <div class="eyebrow" style="color:var(--lab)">Our games</div>
+  <h2>Fresh from the lab.</h2>
+  <div class="ggrid"><a class="gcard" href="#clout-chaser"><img src="feature.jpg" alt="Clout Chaser artwork" width="1024" height="500"><div class="gbody"><span class="chip">Coming soon · Android</span><h3>Clout Chaser</h3><p>Go from 12 followers to famous. Film to the beat, roast your haters and outgrow your rival.</p><div class="tags"><span>Story</span><span>Rhythm</span><span>Comedy</span></div><span class="more">Take a look →</span></div></a><div class="gcard next" aria-label="Upcoming game"><div class="ph"><span class="cube"><svg viewBox="0 0 200 200" class="lamsvg" aria-hidden="true">
+      <defs><clipPath id="lamCL"><polygon points="27,64 97,99 97,178 27,142"/></clipPath><clipPath id="lamCT"><polygon points="100,26 171,60 100,94 29,60"/></clipPath></defs>
+      <polygon points="24,60 100,98 100,182 24,144" fill="#5a2f1c" stroke="#120a06" stroke-width="5" stroke-linejoin="round"/>
+      <g clip-path="url(#lamCL)"><rect x="69.7" y="120.5" width="6.4" height="2.7" rx="1" fill="#fff6e4" transform="rotate(31 69.7 120.5)"/><rect x="64.0" y="103.0" width="5.5" height="3.0" rx="1" fill="#fff6e4" transform="rotate(85 64.0 103.0)"/><rect x="43.0" y="143.6" width="6.0" height="2.1" rx="1" fill="#fff6e4" transform="rotate(36 43.0 143.6)"/><rect x="62.1" y="136.7" width="5.4" height="1.6" rx="1" fill="#fff6e4" transform="rotate(85 62.1 136.7)"/><rect x="87.6" y="96.1" width="5.4" height="1.7" rx="1" fill="#fff6e4" transform="rotate(48 87.6 96.1)"/><rect x="28.7" y="77.9" width="6.1" height="2.4" rx="1" fill="#fff6e4" transform="rotate(5 28.7 77.9)"/><rect x="37.1" y="137.4" width="5.0" height="2.9" rx="1" fill="#fff6e4" transform="rotate(58 37.1 137.4)"/><rect x="58.2" y="80.2" width="3.2" height="2.5" rx="1" fill="#fff6e4" transform="rotate(107 58.2 80.2)"/><rect x="42.6" y="123.6" width="3.8" height="2.1" rx="1" fill="#fff6e4" transform="rotate(133 42.6 123.6)"/><rect x="89.3" y="135.3" width="3.8" height="2.1" rx="1" fill="#fff6e4" transform="rotate(53 89.3 135.3)"/><rect x="29.7" y="118.3" width="5.7" height="2.7" rx="1" fill="#fff6e4" transform="rotate(167 29.7 118.3)"/><rect x="30.7" y="142.6" width="4.7" height="3.1" rx="1" fill="#fff6e4" transform="rotate(25 30.7 142.6)"/><rect x="32.4" y="65.5" width="4.4" height="2.4" rx="1" fill="#fff6e4" transform="rotate(110 32.4 65.5)"/><rect x="92.4" y="100.7" width="5.9" height="3.1" rx="1" fill="#fff6e4" transform="rotate(50 92.4 100.7)"/><rect x="77.7" y="101.9" width="5.1" height="2.9" rx="1" fill="#fff6e4" transform="rotate(22 77.7 101.9)"/><rect x="99.7" y="145.1" width="6.7" height="2.3" rx="1" fill="#fff6e4" transform="rotate(104 99.7 145.1)"/><rect x="49.6" y="122.9" width="4.3" height="2.8" rx="1" fill="#fff6e4" transform="rotate(53 49.6 122.9)"/><rect x="58.2" y="147.9" width="5.8" height="3.2" rx="1" fill="#fff6e4" transform="rotate(160 58.2 147.9)"/><rect x="56.8" y="122.2" width="4.2" height="1.8" rx="1" fill="#fff6e4" transform="rotate(125 56.8 122.2)"/><rect x="47.8" y="137.9" width="6.6" height="1.7" rx="1" fill="#fff6e4" transform="rotate(86 47.8 137.9)"/><rect x="86.5" y="102.2" width="6.9" height="1.9" rx="1" fill="#fff6e4" transform="rotate(128 86.5 102.2)"/><rect x="77.2" y="105.3" width="4.7" height="1.9" rx="1" fill="#fff6e4" transform="rotate(118 77.2 105.3)"/><rect x="49.5" y="90.1" width="5.5" height="3.0" rx="1" fill="#fff6e4" transform="rotate(59 49.5 90.1)"/><rect x="84.2" y="123.1" width="3.5" height="3.0" rx="1" fill="#fff6e4" transform="rotate(67 84.2 123.1)"/><rect x="24.7" y="122.3" width="5.5" height="3.0" rx="1" fill="#fff6e4" transform="rotate(163 24.7 122.3)"/><rect x="39.9" y="118.7" width="5.0" height="1.9" rx="1" fill="#fff6e4" transform="rotate(9 39.9 118.7)"/><rect x="77.6" y="146.3" width="4.2" height="2.0" rx="1" fill="#fff6e4" transform="rotate(61 77.6 146.3)"/><rect x="26.2" y="79.7" width="7.0" height="2.5" rx="1" fill="#fff6e4" transform="rotate(178 26.2 79.7)"/><rect x="36.5" y="80.6" width="5.2" height="2.1" rx="1" fill="#fff6e4" transform="rotate(71 36.5 80.6)"/><rect x="57.0" y="111.6" width="5.7" height="2.2" rx="1" fill="#fff6e4" transform="rotate(61 57.0 111.6)"/><rect x="92.1" y="121.5" width="5.0" height="2.6" rx="1" fill="#fff6e4" transform="rotate(98 92.1 121.5)"/><rect x="68.8" y="102.2" width="4.3" height="2.1" rx="1" fill="#fff6e4" transform="rotate(58 68.8 102.2)"/><rect x="74.9" y="104.0" width="3.7" height="2.7" rx="1" fill="#fff6e4" transform="rotate(57 74.9 104.0)"/><rect x="33.5" y="91.1" width="3.2" height="2.5" rx="1" fill="#fff6e4" transform="rotate(37 33.5 91.1)"/></g>
+      <polygon points="100,98 176,60 176,144 100,182" fill="#3d1f12" stroke="#120a06" stroke-width="5" stroke-linejoin="round"/>
+      <polygon points="108,104 168,74 168,138 108,168" fill="#f5d48f"/>
+      <polygon points="108,128 168,98 168,112 108,142" fill="#e8344f"/>
+      <path d="M118 112 l3 0 M140 92 l4 1 M150 128 l3 -1 M126 150 l2 2 M156 86 l2 1" stroke="#d9b06a" stroke-width="3" stroke-linecap="round"/>
+      <polygon points="100,22 176,60 100,98 24,60" fill="#6b3a22" stroke="#120a06" stroke-width="5" stroke-linejoin="round"/>
+      <g clip-path="url(#lamCT)"><rect x="107.7" y="54.7" width="5.8" height="3.1" rx="1" fill="#fff6e4" transform="rotate(146 107.7 54.7)"/><rect x="121.7" y="44.6" width="6.5" height="2.4" rx="1" fill="#fff6e4" transform="rotate(151 121.7 44.6)"/><rect x="133.8" y="73.1" width="3.6" height="2.6" rx="1" fill="#fff6e4" transform="rotate(145 133.8 73.1)"/><rect x="86.2" y="44.7" width="5.2" height="3.2" rx="1" fill="#fff6e4" transform="rotate(89 86.2 44.7)"/><rect x="101.2" y="86.7" width="6.0" height="1.7" rx="1" fill="#fff6e4" transform="rotate(12 101.2 86.7)"/><rect x="74.4" y="47.7" width="5.7" height="2.8" rx="1" fill="#fff6e4" transform="rotate(178 74.4 47.7)"/><rect x="114.0" y="77.0" width="6.3" height="3.0" rx="1" fill="#fff6e4" transform="rotate(108 114.0 77.0)"/><rect x="92.7" y="52.3" width="6.5" height="2.7" rx="1" fill="#fff6e4" transform="rotate(63 92.7 52.3)"/><rect x="123.7" y="81.4" width="4.3" height="3.0" rx="1" fill="#fff6e4" transform="rotate(27 123.7 81.4)"/><rect x="126.3" y="36.7" width="3.3" height="2.6" rx="1" fill="#fff6e4" transform="rotate(131 126.3 36.7)"/><rect x="105.8" y="91.7" width="4.9" height="2.7" rx="1" fill="#fff6e4" transform="rotate(26 105.8 91.7)"/><rect x="110.2" y="37.7" width="3.2" height="2.1" rx="1" fill="#fff6e4" transform="rotate(79 110.2 37.7)"/><rect x="88.8" y="70.8" width="6.2" height="2.9" rx="1" fill="#fff6e4" transform="rotate(35 88.8 70.8)"/><rect x="111.3" y="67.0" width="4.8" height="2.4" rx="1" fill="#fff6e4" transform="rotate(83 111.3 67.0)"/><rect x="107.1" y="50.8" width="4.2" height="1.8" rx="1" fill="#fff6e4" transform="rotate(91 107.1 50.8)"/><rect x="80.0" y="52.3" width="5.2" height="2.6" rx="1" fill="#fff6e4" transform="rotate(79 80.0 52.3)"/><rect x="110.0" y="27.3" width="3.6" height="3.1" rx="1" fill="#fff6e4" transform="rotate(12 110.0 27.3)"/><rect x="133.5" y="71.4" width="5.0" height="1.8" rx="1" fill="#fff6e4" transform="rotate(148 133.5 71.4)"/><rect x="76.1" y="38.2" width="3.9" height="2.7" rx="1" fill="#fff6e4" transform="rotate(102 76.1 38.2)"/><rect x="33.7" y="62.3" width="6.0" height="2.7" rx="1" fill="#fff6e4" transform="rotate(143 33.7 62.3)"/><rect x="80.5" y="73.4" width="5.1" height="1.9" rx="1" fill="#fff6e4" transform="rotate(14 80.5 73.4)"/><rect x="102.8" y="27.9" width="4.1" height="2.7" rx="1" fill="#fff6e4" transform="rotate(120 102.8 27.9)"/><rect x="68.4" y="80.4" width="3.1" height="2.2" rx="1" fill="#fff6e4" transform="rotate(61 68.4 80.4)"/><rect x="58.3" y="64.5" width="5.1" height="1.9" rx="1" fill="#fff6e4" transform="rotate(170 58.3 64.5)"/><rect x="152.1" y="68.3" width="5.1" height="3.0" rx="1" fill="#fff6e4" transform="rotate(168 152.1 68.3)"/><rect x="108.8" y="69.6" width="6.2" height="2.1" rx="1" fill="#fff6e4" transform="rotate(89 108.8 69.6)"/><rect x="115.2" y="71.4" width="5.7" height="2.5" rx="1" fill="#fff6e4" transform="rotate(98 115.2 71.4)"/><rect x="98.7" y="96.1" width="6.1" height="2.1" rx="1" fill="#fff6e4" transform="rotate(114 98.7 96.1)"/><rect x="85.0" y="80.2" width="4.5" height="3.0" rx="1" fill="#fff6e4" transform="rotate(57 85.0 80.2)"/><rect x="135.5" y="71.1" width="4.4" height="2.5" rx="1" fill="#fff6e4" transform="rotate(151 135.5 71.1)"/></g>
+      <g class="lameyes"><ellipse cx="50" cy="104" rx="7" ry="9" fill="#fff"/><ellipse cx="78" cy="118" rx="7" ry="9" fill="#fff"/><circle cx="52" cy="106" r="4" fill="#120a06"/><circle cx="80" cy="120" r="4" fill="#120a06"/></g>
+      <path d="M52 128 Q64 140 78 134" stroke="#fff6e4" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <ellipse cx="40" cy="120" rx="6" ry="4" fill="#ff7b93" opacity=".7"/><ellipse cx="90" cy="140" rx="6" ry="4" fill="#ff7b93" opacity=".7"/>
+    </svg></span></div><div class="gbody"><span class="chip">In development</span><h3>Game 02</h3><p>Top secret. Currently in the oven. Check back soon.</p></div></div></div>
+</div></section>
+
+<article class="gamepage" id="clout-chaser" aria-label="Clout Chaser">
+<section class="game"><div class="wrap">
+  <div class="gamehead">
+    <div>
+      <a class="back" href="#games">← All games</a><div class="eyebrow">Game 01 · Android</div>
+      <h2 class="logo3d"><span>CLOUT</span><span>CHASER</span></h2>
+      <p class="pitch">Go from 12 followers to famous. Film videos to the beat, roast your haters, outgrow your rival and keep Nan away from the scammers. Just try not to get caught buying bots.</p>
+      <div class="btns">
+        <span class="btn soon" aria-disabled="true"><span class="live"></span>Coming soon to Google Play</span><span class="btn soon" aria-disabled="true">Android</span>
+      </div>
+    </div>
+    <div class="feat"><img src="feature.jpg" alt="Clout Chaser artwork: the cast around the main character with a +1M fans badge" width="1024" height="500"></div>
+  </div>
+  <div class="shots">
+    <div class="shead"><h3>Screenshots</h3><div class="arrows"><button class="arr" type="button" data-dir="-1" aria-label="Previous screenshots">←</button><button class="arr" type="button" data-dir="1" aria-label="Next screenshots">→</button></div></div>
+    <div class="carousel"><div class="strip" tabindex="0" aria-label="Clout Chaser screenshots">
+      <figure><img src="shot-1-title.jpg" alt="Title screen" width="540" height="960" loading="lazy"><figcaption>Title screen</figcaption></figure><figure><img src="shot-2-build-your-empire.jpg" alt="Your profile and leaderboard" width="540" height="960" loading="lazy"><figcaption>Your profile and leaderboard</figcaption></figure><figure><img src="shot-3-hit-the-beat.jpg" alt="Rhythm mini-game" width="540" height="960" loading="lazy"><figcaption>Rhythm mini-game</figcaption></figure><figure><img src="shot-4-go-viral.jpg" alt="Going viral" width="540" height="960" loading="lazy"><figcaption>Going viral</figcaption></figure><figure><img src="shot-5-story.jpg" alt="Story episode" width="540" height="960" loading="lazy"><figcaption>Story episode</figcaption></figure><figure><img src="shot-6-family-chat.jpg" alt="Family group chat" width="540" height="960" loading="lazy"><figcaption>Family group chat</figcaption></figure><figure><img src="shot-7-fan-mail.jpg" alt="Fan mail and stickers" width="540" height="960" loading="lazy"><figcaption>Fan mail and stickers</figcaption></figure>
+    </div><div class="prog" aria-hidden="true"><i></i></div></div>
+  </div>
+</div></section>
+
+<section class="inside"><div class="wrap">
+  <div class="eyebrow" style="color:var(--lab)">Clout Chaser · what's in the box</div>
+  <h2>A whole influencer career in your pocket.</h2>
+  <p class="lead">Clout Chaser plays offline, runs on older phones, and has an optional online mode with real leaderboards, friends and cloud saves.</p>
+  <div class="grid">
+    <div class="num"><b>33</b><span>story episodes</span><p>Two seasons and a finale with two endings. Your choices change who sticks around.</p></div><div class="num"><b>10</b><span>ways to go viral</span><p>Celeb shares, meme templates, morning news, even a video of Nan reacting.</p></div><div class="num"><b>30</b><span>original songs</span><p>A shuffled soundtrack that changes with the mood: lo-fi at the café, rock for dance battles.</p></div><div class="num"><b>32</b><span>fan letters</span><p>Real letters from fans, each with a gift inside. Collect all 30 stickers.</p></div><div class="num"><b>4</b><span>clap-back styles</span><p>Roast, be nice, make it content or block. Every hater is a decision.</p></div><div class="num"><b>1</b><span>shady shop</span><p>Bot followers are cheap, fast and very risky. Get caught and the whole internet knows.</p></div>
+  </div>
+</div></section>
+
+<section class="cast"><div class="wrap">
+  <div class="eyebrow" style="color:var(--jam)">Clout Chaser · the cast</div>
+  <h2>Everyone has an opinion about your content.</h2>
+  <p class="lead">Your family is in the group chat, your rival is in your comments, and a robot wants your job.</p>
+  <div class="people">
+    <div class="person"><div class="av" style="background:#3d7bff"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><pattern id="pxi6xj" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M6.0 2.0L7.1 4.5L9.8 4.8L7.7 6.6L8.4 9.2L6.0 7.8L3.6 9.2L4.3 6.6L2.2 4.8L4.9 4.5Z" fill="rgba(255,255,255,.6)"/></pattern></defs>
+      <circle cx="50" cy="34" r="31" fill="#e9c46a"/><circle cx="22" cy="32" r="11" fill="#e9c46a"/><circle cx="28" cy="15" r="11" fill="#e9c46a"/><circle cx="50" cy="6" r="11" fill="#e9c46a"/><circle cx="72" cy="15" r="11" fill="#e9c46a"/><circle cx="78" cy="32" r="11" fill="#e9c46a"/><path d="M14 104 Q16 74 50 72 Q84 74 86 104Z" fill="#ff5d73" stroke="#161616" stroke-width="2"/><path d="M14 104 Q16 74 50 72 Q84 74 86 104Z" fill="url(#pxi6xj)"/>
+      <rect x="44" y="60" width="12" height="14" fill="#d9a172"/><rect x="44" y="60" width="12" height="5" fill="rgba(0,0,0,.12)"/>
+      <path d="M33 75 Q50 93 67 75" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="4"/><path d="M46 82 L45 94 M54 82 L55 94" stroke="#fff" stroke-width="1.6"/><circle cx="45" cy="95" r="1.4" fill="#fff"/><circle cx="55" cy="95" r="1.4" fill="#fff"/>
+      <ellipse cx="28.5" cy="48" rx="3.5" ry="5" fill="#d9a172"/><ellipse cx="71.5" cy="48" rx="3.5" ry="5" fill="#d9a172"/>
+      <ellipse cx="50" cy="45" rx="21" ry="23" fill="#d9a172"/>
+      <path d="M62 28 Q72 40 66 60 Q70 46 62 28Z" fill="rgba(0,0,0,.07)"/>
+      <path d="M29 42 Q30 24 50 23 Q70 24 71 42 Q64 32 50 31 Q36 32 29 42Z" fill="#e9c46a"/><circle cx="38" cy="12" r="4" fill="rgba(255,255,255,.32)"/>
+      <g fill="none" stroke="#161616" stroke-width="2.2" stroke-linecap="round"><path d="M35 36 Q41 32 46 35 M54 35 Q59 32 65 36"/></g>
+      <g class="eyes" style="animation-delay:-3.34s"><path d="M41.0 40.8L42.4 44.1L45.9 44.4L43.2 46.7L44.1 50.2L41.0 48.3L37.9 50.2L38.8 46.7L36.1 44.4L39.6 44.1Z" fill="#ffd23f" stroke="#161616" stroke-width="1"/><path d="M59.0 40.8L60.4 44.1L63.9 44.4L61.2 46.7L62.1 50.2L59.0 48.3L55.9 50.2L56.8 46.7L54.1 44.4L57.6 44.1Z" fill="#ffd23f" stroke="#161616" stroke-width="1"/></g>
+      <path d="M50 48 Q48 52 51 53" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="36" cy="54" r="3.2" fill="#ff5d73" opacity=".35"/><circle cx="64" cy="54" r="3.2" fill="#ff5d73" opacity=".35"/>
+      <circle cx="37" cy="52" r=".95" fill="#a0522d" opacity=".75"/><circle cx="40" cy="54" r=".95" fill="#a0522d" opacity=".75"/><circle cx="35" cy="55" r=".95" fill="#a0522d" opacity=".75"/><circle cx="63" cy="52" r=".95" fill="#a0522d" opacity=".75"/><circle cx="60" cy="54" r=".95" fill="#a0522d" opacity=".75"/><circle cx="65" cy="55" r=".95" fill="#a0522d" opacity=".75"/><path d="M42 55 Q50 65 58 55 Z" fill="#161616"/><path d="M45 58 Q50 62 55 58" fill="#ff8fa0"/><path d="M33 42 H48 Q48 52 40 51 Q33 50 33 42Z M52 42 H67 Q67 50 60 51 Q52 52 52 42Z" fill="#161616"/><path d="M48 44 H52" stroke="#161616" stroke-width="2.4"/><path d="M36 44 L40 44 M55 44 L59 44" stroke="rgba(255,255,255,.5)" stroke-width="1.6"/>
+    </svg></div><b>You</b><small>12 followers. Big dreams. Questionable hat.</small></div><div class="person"><div class="av" style="background:#ffd23f"><svg viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M14 104 Q16 74 50 72 Q84 74 86 104Z" fill="#3ddc97" stroke="#161616" stroke-width="2"/>
+      <rect x="44" y="60" width="12" height="14" fill="#f5c79e"/><rect x="44" y="60" width="12" height="5" fill="rgba(0,0,0,.12)"/>
+      <path d="M41 73 Q50 80 59 73" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="2"/>
+      <ellipse cx="28.5" cy="48" rx="3.5" ry="5" fill="#f5c79e"/><ellipse cx="71.5" cy="48" rx="3.5" ry="5" fill="#f5c79e"/>
+      <ellipse cx="50" cy="45" rx="21" ry="23" fill="#f5c79e"/>
+      <path d="M62 28 Q72 40 66 60 Q70 46 62 28Z" fill="rgba(0,0,0,.07)"/>
+      <circle cx="50" cy="12" r="10" fill="#e9c46a"/><circle cx="46" cy="9" r="3" fill="rgba(255,255,255,.32)"/><path d="M29 44 Q27 18 50 18 Q73 18 71 44 Q67 29 50 28 Q36 29 29 44Z" fill="#e9c46a"/><path d="M38 24 Q46 19 56 20" fill="none" stroke="rgba(255,255,255,.32)" stroke-width="2.6" stroke-linecap="round"/>
+      <g fill="none" stroke="#161616" stroke-width="2.2" stroke-linecap="round"><path d="M36 38 Q41 36 46 38 M54 38 Q59 36 64 38"/></g>
+      <g class="eyes" style="animation-delay:-1.30s"><circle cx="41" cy="46" r="2.8" fill="#161616"/><circle cx="41.9" cy="45" r="0.90" fill="#fff"/><path d="M38 43.2 L36.4 40.6 M41 42.6 L41 39.8 M44 43.2 L45.6 40.6" stroke="#161616" stroke-width="1.3" stroke-linecap="round"/><circle cx="59" cy="46" r="2.8" fill="#161616"/><circle cx="59.9" cy="45" r="0.90" fill="#fff"/><path d="M56 43.2 L54.4 40.6 M59 42.6 L59 39.8 M62 43.2 L63.6 40.6" stroke="#161616" stroke-width="1.3" stroke-linecap="round"/></g>
+      <path d="M50 48 Q48 52 51 53" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="36" cy="54" r="3.2" fill="#ff5d73" opacity=".35"/><circle cx="64" cy="54" r="3.2" fill="#ff5d73" opacity=".35"/>
+      <path d="M43 56 Q50 62 57 56" fill="none" stroke="#161616" stroke-width="2.4" stroke-linecap="round"/><g fill="rgba(255,255,255,.15)" stroke="#161616" stroke-width="2.4"><circle cx="41" cy="46" r="6.5"/><circle cx="59" cy="46" r="6.5"/><path d="M47.5 46 H52.5" fill="none"/></g>
+    </svg></div><b>Mum</b><small>Still waiting for you to get a real job.</small></div><div class="person"><div class="av" style="background:#3ddc97"><svg viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M14 104 Q16 74 50 72 Q84 74 86 104Z" fill="#3d7bff" stroke="#161616" stroke-width="2"/>
+      <rect x="44" y="60" width="12" height="14" fill="#f5c79e"/><rect x="44" y="60" width="12" height="5" fill="rgba(0,0,0,.12)"/>
+      <path d="M40 73 L50 84 L60 73" fill="none" stroke="#fff" stroke-width="3"/><text x="50" y="100" text-anchor="middle" font-family="Bowlby One, Impact, sans-serif" font-size="13" fill="#fff" stroke="#161616" stroke-width=".8">1</text>
+      <ellipse cx="28.5" cy="48" rx="3.5" ry="5" fill="#f5c79e"/><ellipse cx="71.5" cy="48" rx="3.5" ry="5" fill="#f5c79e"/>
+      <ellipse cx="50" cy="45" rx="21" ry="23" fill="#f5c79e"/>
+      <path d="M62 28 Q72 40 66 60 Q70 46 62 28Z" fill="rgba(0,0,0,.07)"/>
+      <path d="M38 27 Q45 22 53 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="3" stroke-linecap="round"/>
+      <g fill="none" stroke="#161616" stroke-width="2.2" stroke-linecap="round"><path d="M35 36 Q41 32 46 35 M54 35 Q59 32 65 36"/></g>
+      <g class="eyes" style="animation-delay:-2.93s"><path d="M41.0 40.8L42.4 44.1L45.9 44.4L43.2 46.7L44.1 50.2L41.0 48.3L37.9 50.2L38.8 46.7L36.1 44.4L39.6 44.1Z" fill="#ffd23f" stroke="#161616" stroke-width="1"/><path d="M59.0 40.8L60.4 44.1L63.9 44.4L61.2 46.7L62.1 50.2L59.0 48.3L55.9 50.2L56.8 46.7L54.1 44.4L57.6 44.1Z" fill="#ffd23f" stroke="#161616" stroke-width="1"/></g>
+      <path d="M50 48 Q48 52 51 53" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="36" cy="54" r="3.2" fill="#ff5d73" opacity=".35"/><circle cx="64" cy="54" r="3.2" fill="#ff5d73" opacity=".35"/>
+      <path d="M41 54 Q45.5 50 50 53 Q54.5 50 59 54 Q54.5 56.5 50 54.6 Q45.5 56.5 41 54Z" fill="#5b3a1e" stroke="rgba(0,0,0,.2)" stroke-width=".6"/><path d="M42 55 Q50 65 58 55 Z" fill="#161616"/><path d="M45 58 Q50 62 55 58" fill="#ff8fa0"/><g fill="rgba(255,255,255,.15)" stroke="#161616" stroke-width="2.4"><circle cx="41" cy="46" r="6.5"/><circle cx="59" cy="46" r="6.5"/><path d="M47.5 46 H52.5" fill="none"/></g>
+    </svg></div><b>Dad</b><small>Hosts the Dad Bod Pod. Three listeners.</small></div><div class="person"><div class="av" style="background:#ff9f1c"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><pattern id="prrrc8" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M6.0 2.0L7.1 4.5L9.8 4.8L7.7 6.6L8.4 9.2L6.0 7.8L3.6 9.2L4.3 6.6L2.2 4.8L4.9 4.5Z" fill="rgba(255,255,255,.6)"/></pattern></defs>
+      <path d="M14 104 Q16 74 50 72 Q84 74 86 104Z" fill="#ff9f1c" stroke="#161616" stroke-width="2"/><path d="M14 104 Q16 74 50 72 Q84 74 86 104Z" fill="url(#prrrc8)"/>
+      <rect x="44" y="60" width="12" height="14" fill="#ffe0c7"/><rect x="44" y="60" width="12" height="5" fill="rgba(0,0,0,.12)"/>
+      <path d="M33 75 Q50 93 67 75" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="4"/><path d="M46 82 L45 94 M54 82 L55 94" stroke="#fff" stroke-width="1.6"/><circle cx="45" cy="95" r="1.4" fill="#fff"/><circle cx="55" cy="95" r="1.4" fill="#fff"/>
+      <ellipse cx="28.5" cy="48" rx="3.5" ry="5" fill="#ffe0c7"/><ellipse cx="71.5" cy="48" rx="3.5" ry="5" fill="#ffe0c7"/>
+      <ellipse cx="50" cy="45" rx="21" ry="23" fill="#ffe0c7"/>
+      <path d="M62 28 Q72 40 66 60 Q70 46 62 28Z" fill="rgba(0,0,0,.07)"/>
+      <circle cx="30" cy="34" r="9" fill="#ff5d73"/><circle cx="36" cy="24" r="9" fill="#ff5d73"/><circle cx="46" cy="19" r="9" fill="#ff5d73"/><circle cx="56" cy="19" r="9" fill="#ff5d73"/><circle cx="65" cy="24" r="9" fill="#ff5d73"/><circle cx="70" cy="34" r="9" fill="#ff5d73"/><circle cx="50" cy="25" r="8" fill="#ff5d73"/><circle cx="44" cy="17" r="3" fill="rgba(255,255,255,.32)"/><circle cx="62" cy="21" r="2" fill="rgba(255,255,255,.32)"/>
+      <g fill="none" stroke="#161616" stroke-width="2.2" stroke-linecap="round"><path d="M35 36 Q41 32 46 35 M54 35 Q59 32 65 36"/></g>
+      <g class="eyes" style="animation-delay:-4.14s"><path d="M41.0 40.8L42.4 44.1L45.9 44.4L43.2 46.7L44.1 50.2L41.0 48.3L37.9 50.2L38.8 46.7L36.1 44.4L39.6 44.1Z" fill="#ffd23f" stroke="#161616" stroke-width="1"/><path d="M59.0 40.8L60.4 44.1L63.9 44.4L61.2 46.7L62.1 50.2L59.0 48.3L55.9 50.2L56.8 46.7L54.1 44.4L57.6 44.1Z" fill="#ffd23f" stroke="#161616" stroke-width="1"/></g>
+      <path d="M50 48 Q48 52 51 53" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="36" cy="54" r="3.2" fill="#ff5d73" opacity=".35"/><circle cx="64" cy="54" r="3.2" fill="#ff5d73" opacity=".35"/>
+      <path d="M42 55 Q50 65 58 55 Z" fill="#161616"/><path d="M45 58 Q50 62 55 58" fill="#ff8fa0"/><g fill="rgba(255,255,255,.15)" stroke="#161616" stroke-width="2.4"><circle cx="41" cy="46" r="6.5"/><circle cx="59" cy="46" r="6.5"/><path d="M47.5 46 H52.5" fill="none"/></g><circle cx="30" cy="31" r="4.6" fill="#ff5d73" stroke="#161616" stroke-width="1"/><circle cx="30" cy="31" r="1.5" fill="#ffd23f"/><circle cx="38" cy="22" r="4.6" fill="#ffd23f" stroke="#161616" stroke-width="1"/><circle cx="38" cy="22" r="1.5" fill="#ffd23f"/><circle cx="47" cy="18" r="4.6" fill="#fff" stroke="#161616" stroke-width="1"/><circle cx="47" cy="18" r="1.5" fill="#ffd23f"/><circle cx="56" cy="19" r="4.6" fill="#a95cf0" stroke="#161616" stroke-width="1"/><circle cx="56" cy="19" r="1.5" fill="#ffd23f"/><circle cx="64" cy="23" r="4.6" fill="#ff9f1c" stroke="#161616" stroke-width="1"/><circle cx="64" cy="23" r="1.5" fill="#ffd23f"/><circle cx="70" cy="31" r="4.6" fill="#3ddc97" stroke="#161616" stroke-width="1"/><circle cx="70" cy="31" r="1.5" fill="#ffd23f"/>
+    </svg></div><b>Nan</b><small>Bingo champion. Scams the scammers.</small></div><div class="person"><div class="av" style="background:#ff8fa3"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><pattern id="pn924p" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M6.0 2.0L7.1 4.5L9.8 4.8L7.7 6.6L8.4 9.2L6.0 7.8L3.6 9.2L4.3 6.6L2.2 4.8L4.9 4.5Z" fill="rgba(255,255,255,.6)"/></pattern></defs>
+      <circle cx="21" cy="42" r="10" fill="#ff5d73"/><circle cx="79" cy="42" r="10" fill="#ff5d73"/><path d="M14 104 Q16 74 50 72 Q84 74 86 104Z" fill="#ff9f1c" stroke="#161616" stroke-width="2"/><path d="M14 104 Q16 74 50 72 Q84 74 86 104Z" fill="url(#pn924p)"/>
+      <rect x="44" y="60" width="12" height="14" fill="#d9a172"/><rect x="44" y="60" width="12" height="5" fill="rgba(0,0,0,.12)"/>
+      <path d="M33 75 Q50 93 67 75" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="4"/><path d="M46 82 L45 94 M54 82 L55 94" stroke="#fff" stroke-width="1.6"/><circle cx="45" cy="95" r="1.4" fill="#fff"/><circle cx="55" cy="95" r="1.4" fill="#fff"/>
+      <ellipse cx="28.5" cy="48" rx="3.5" ry="5" fill="#d9a172"/><ellipse cx="71.5" cy="48" rx="3.5" ry="5" fill="#d9a172"/>
+      <ellipse cx="50" cy="45" rx="21" ry="23" fill="#d9a172"/>
+      <path d="M62 28 Q72 40 66 60 Q70 46 62 28Z" fill="rgba(0,0,0,.07)"/>
+      <path d="M29 44 Q27 17 50 16 Q73 17 71 44 Q67 29 50 28 Q36 29 29 44Z" fill="#ff5d73"/><path d="M38 24 Q46 19 56 20" fill="none" stroke="rgba(255,255,255,.32)" stroke-width="2.6" stroke-linecap="round"/><circle cx="28" cy="36" r="3" fill="#ff5d73" stroke="#161616" stroke-width="1"/><circle cx="72" cy="36" r="3" fill="#ff5d73" stroke="#161616" stroke-width="1"/>
+      <g fill="none" stroke="#161616" stroke-width="2.2" stroke-linecap="round"><path d="M35 39 Q41 38 46 39 M54 36 Q59 33 65 36"/></g>
+      <g class="eyes" style="animation-delay:-1.37s"><path d="M37 46 Q41 44 45 46 M55 46 Q59 44 63 46" stroke="#161616" stroke-width="2.6" fill="none" stroke-linecap="round"/></g>
+      <path d="M50 48 Q48 52 51 53" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="36" cy="54" r="3.2" fill="#ff5d73" opacity=".35"/><circle cx="64" cy="54" r="3.2" fill="#ff5d73" opacity=".35"/>
+      <circle cx="37" cy="52" r=".95" fill="#a0522d" opacity=".75"/><circle cx="40" cy="54" r=".95" fill="#a0522d" opacity=".75"/><circle cx="35" cy="55" r=".95" fill="#a0522d" opacity=".75"/><circle cx="63" cy="52" r=".95" fill="#a0522d" opacity=".75"/><circle cx="60" cy="54" r=".95" fill="#a0522d" opacity=".75"/><circle cx="65" cy="55" r=".95" fill="#a0522d" opacity=".75"/><path d="M44 57 Q52 60 58 54" fill="none" stroke="#161616" stroke-width="2.4" stroke-linecap="round"/><circle cx="29.5" cy="55" r="3" fill="#ffd23f" stroke="#161616" stroke-width="1.5"/><circle cx="70.5" cy="55" r="3" fill="#ffd23f" stroke="#161616" stroke-width="1.5"/>
+    </svg></div><b>Kezza</b><small>Your bestie. Occasionally a ficus.</small></div><div class="person"><div class="av" style="background:#a95cf0"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><pattern id="p1zv3g" width="16" height="30" patternUnits="userSpaceOnUse" y="76"><path d="M0 30 Q4 10 8 22 Q12 4 16 30Z" fill="#ff9f1c"/><path d="M3 30 Q6 18 8 26 Q10 16 13 30Z" fill="#ffd23f"/></pattern></defs>
+      <path d="M14 104 Q16 74 50 72 Q84 74 86 104Z" fill="#161616" stroke="#161616" stroke-width="2"/><path d="M14 104 Q16 74 50 72 Q84 74 86 104Z" fill="url(#p1zv3g)"/>
+      <rect x="44" y="60" width="12" height="14" fill="#ead0b8"/><rect x="44" y="60" width="12" height="5" fill="rgba(0,0,0,.12)"/>
+      <path d="M18 86 Q50 80 82 86 M16 96 Q50 90 84 96" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="2"/><path d="M37 73 Q50 64 63 73 L61 79 Q50 74 39 79Z" fill="#161616" stroke="#161616" stroke-width="1.6"/><line x1="50" y1="77" x2="50" y2="104" stroke="rgba(0,0,0,.2)" stroke-width="1.6"/>
+      <ellipse cx="28.5" cy="48" rx="3.5" ry="5" fill="#ead0b8"/><ellipse cx="71.5" cy="48" rx="3.5" ry="5" fill="#ead0b8"/>
+      <ellipse cx="50" cy="45" rx="21" ry="23" fill="#ead0b8"/>
+      <path d="M62 28 Q72 40 66 60 Q70 46 62 28Z" fill="rgba(0,0,0,.07)"/>
+      <path d="M44 30 Q43 6 50 3 Q57 6 56 30Z" fill="#7b5cff"/><path d="M48 8 L48 26" stroke="rgba(255,255,255,.32)" stroke-width="2"/><path d="M30 40 Q30 28 44 26 L56 26 Q70 28 70 40 Q66 32 50 31 Q34 32 30 40Z" fill="#7b5cff" opacity=".45"/>
+      <g fill="none" stroke="#161616" stroke-width="2.2" stroke-linecap="round"><path d="M35 39 Q41 38 46 39 M54 36 Q59 33 65 36"/></g>
+      <g class="eyes" style="animation-delay:-3.42s"><path d="M37 46 Q41 44 45 46 M55 46 Q59 44 63 46" stroke="#161616" stroke-width="2.6" fill="none" stroke-linecap="round"/></g>
+      <path d="M50 48 Q48 52 51 53" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="36" cy="54" r="3.2" fill="#ff5d73" opacity=".35"/><circle cx="64" cy="54" r="3.2" fill="#ff5d73" opacity=".35"/>
+      <path d="M44 57 Q52 60 58 54" fill="none" stroke="#161616" stroke-width="2.4" stroke-linecap="round"/><path d="M33 42 H48 Q48 52 40 51 Q33 50 33 42Z M52 42 H67 Q67 50 60 51 Q52 52 52 42Z" fill="#161616"/><path d="M48 44 H52" stroke="#161616" stroke-width="2.4"/><path d="M36 44 L40 44 M55 44 L59 44" stroke="rgba(255,255,255,.5)" stroke-width="1.6"/>
+    </svg></div><b>@vibe.king</b><small>Your rival. Ate glue in Year 4.</small></div><div class="person"><div class="av" style="background:#7cd3ff"><svg viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M14 104 Q16 74 50 72 Q84 74 86 104Z" fill="#2ec4b6" stroke="#161616" stroke-width="2"/>
+      <rect x="44" y="60" width="12" height="14" fill="#8a5532"/><rect x="44" y="60" width="12" height="5" fill="rgba(0,0,0,.12)"/>
+      <path d="M33 75 Q50 93 67 75" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="4"/><path d="M46 82 L45 94 M54 82 L55 94" stroke="#fff" stroke-width="1.6"/><circle cx="45" cy="95" r="1.4" fill="#fff"/><circle cx="55" cy="95" r="1.4" fill="#fff"/>
+      <ellipse cx="28.5" cy="48" rx="3.5" ry="5" fill="#8a5532"/><ellipse cx="71.5" cy="48" rx="3.5" ry="5" fill="#8a5532"/>
+      <ellipse cx="50" cy="45" rx="21" ry="23" fill="#8a5532"/>
+      <path d="M62 28 Q72 40 66 60 Q70 46 62 28Z" fill="rgba(0,0,0,.07)"/>
+      <circle cx="30" cy="34" r="9" fill="#5b3a1e"/><circle cx="36" cy="24" r="9" fill="#5b3a1e"/><circle cx="46" cy="19" r="9" fill="#5b3a1e"/><circle cx="56" cy="19" r="9" fill="#5b3a1e"/><circle cx="65" cy="24" r="9" fill="#5b3a1e"/><circle cx="70" cy="34" r="9" fill="#5b3a1e"/><circle cx="50" cy="25" r="8" fill="#5b3a1e"/><circle cx="44" cy="17" r="3" fill="rgba(255,255,255,.32)"/><circle cx="62" cy="21" r="2" fill="rgba(255,255,255,.32)"/>
+      <g fill="none" stroke="#161616" stroke-width="2.2" stroke-linecap="round"><path d="M36 38 Q41 36 46 38 M54 38 Q59 36 64 38"/></g>
+      <g class="eyes" style="animation-delay:-1.38s"><circle cx="41" cy="46" r="3.5999999999999996" fill="#161616"/><circle cx="41.9" cy="45" r="1.15" fill="#fff"/><circle cx="40" cy="47.3" r="0.58" fill="#fff"/><circle cx="59" cy="46" r="3.5999999999999996" fill="#161616"/><circle cx="59.9" cy="45" r="1.15" fill="#fff"/><circle cx="58" cy="47.3" r="0.58" fill="#fff"/></g>
+      <path d="M50 48 Q48 52 51 53" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="36" cy="54" r="3.2" fill="#ff5d73" opacity=".35"/><circle cx="64" cy="54" r="3.2" fill="#ff5d73" opacity=".35"/>
+      <path d="M43 56 Q50 62 57 56" fill="none" stroke="#161616" stroke-width="2.4" stroke-linecap="round"/>
+    </svg></div><b>Sam</b><small>The 8:14 regular. Oat flat white.</small></div><div class="person"><div class="av" style="background:#3d1f12"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><pattern id="prswxj" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="3.5" fill="rgba(255,255,255,.38)"/></pattern></defs>
+      <path d="M14 104 Q16 74 50 72 Q84 74 86 104Z" fill="#7b5cff" stroke="#161616" stroke-width="2"/><path d="M14 104 Q16 74 50 72 Q84 74 86 104Z" fill="url(#prswxj)"/>
+      <rect x="44" y="60" width="12" height="14" fill="#bfe3ff"/><rect x="44" y="60" width="12" height="5" fill="rgba(0,0,0,.12)"/>
+      <path d="M18 86 Q50 80 82 86 M16 96 Q50 90 84 96" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="2"/><path d="M37 73 Q50 64 63 73 L61 79 Q50 74 39 79Z" fill="#7b5cff" stroke="#161616" stroke-width="1.6"/><line x1="50" y1="77" x2="50" y2="104" stroke="rgba(0,0,0,.2)" stroke-width="1.6"/>
+      <ellipse cx="28.5" cy="48" rx="3.5" ry="5" fill="#bfe3ff"/><ellipse cx="71.5" cy="48" rx="3.5" ry="5" fill="#bfe3ff"/>
+      <ellipse cx="50" cy="45" rx="21" ry="23" fill="#bfe3ff"/>
+      <path d="M62 28 Q72 40 66 60 Q70 46 62 28Z" fill="rgba(0,0,0,.07)"/>
+      <path d="M28 42 L29 22 L36 29 L39 10 L46 24 L52 5 L56 24 L62 10 L65 27 L71 20 L72 42 Q66 30 50 29 Q34 30 28 42Z" fill="#3ddc97"/><path d="M52 8 L50 22" stroke="rgba(255,255,255,.32)" stroke-width="2"/>
+      <g fill="none" stroke="#161616" stroke-width="2.2" stroke-linecap="round"><path d="M35 39 Q41 38 46 39 M54 36 Q59 33 65 36"/></g>
+      <g class="eyes" style="animation-delay:-0.28s"><path d="M37 46 Q41 44 45 46 M55 46 Q59 44 63 46" stroke="#161616" stroke-width="2.6" fill="none" stroke-linecap="round"/></g>
+      <path d="M50 48 Q48 52 51 53" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="36" cy="54" r="3.2" fill="#ff5d73" opacity=".35"/><circle cx="64" cy="54" r="3.2" fill="#ff5d73" opacity=".35"/>
+      <path d="M44 57 Q52 60 58 54" fill="none" stroke="#161616" stroke-width="2.4" stroke-linecap="round"/><path d="M41.0 38.5L43.0 43.3L48.1 43.7L44.2 47.0L45.4 52.1L41.0 49.4L36.6 52.1L37.8 47.0L33.9 43.7L39.0 43.3Z" fill="#a95cf0" stroke="#161616" stroke-width="1.5"/><path d="M59.0 38.5L61.0 43.3L66.1 43.7L62.2 47.0L63.4 52.1L59.0 49.4L54.6 52.1L55.8 47.0L51.9 43.7L57.0 43.3Z" fill="#a95cf0" stroke="#161616" stroke-width="1.5"/><path d="M47 45 H53" stroke="#161616" stroke-width="2"/>
+    </svg></div><b>NOVA.ai</b><small>An AI creator that never sleeps.</small></div><div class="person"><div class="av" style="background:#ffd23f"><svg viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M14 104 Q16 74 50 72 Q84 74 86 104Z" fill="#3d7bff" stroke="#161616" stroke-width="2"/>
+      <rect x="44" y="60" width="12" height="14" fill="#b97a4d"/><rect x="44" y="60" width="12" height="5" fill="rgba(0,0,0,.12)"/>
+      <path d="M40 73 L50 84 L60 73" fill="none" stroke="#fff" stroke-width="3"/><text x="50" y="100" text-anchor="middle" font-family="Bowlby One, Impact, sans-serif" font-size="13" fill="#fff" stroke="#161616" stroke-width=".8">11</text>
+      <ellipse cx="28.5" cy="48" rx="3.5" ry="5" fill="#b97a4d"/><ellipse cx="71.5" cy="48" rx="3.5" ry="5" fill="#b97a4d"/>
+      <ellipse cx="50" cy="45" rx="21" ry="23" fill="#b97a4d"/>
+      <path d="M62 28 Q72 40 66 60 Q70 46 62 28Z" fill="rgba(0,0,0,.07)"/>
+      <path d="M29 44 Q27 17 50 16 Q73 17 71 44 Q67 29 50 28 Q36 29 29 44Z" fill="#1d1a17"/><path d="M38 24 Q46 19 56 20" fill="none" stroke="rgba(255,255,255,.32)" stroke-width="2.6" stroke-linecap="round"/>
+      <g fill="none" stroke="#161616" stroke-width="2.2" stroke-linecap="round"><path d="M35 36 Q41 32 46 35 M54 35 Q59 32 65 36"/></g>
+      <g class="eyes" style="animation-delay:-3.71s"><path d="M41.0 40.8L42.4 44.1L45.9 44.4L43.2 46.7L44.1 50.2L41.0 48.3L37.9 50.2L38.8 46.7L36.1 44.4L39.6 44.1Z" fill="#ffd23f" stroke="#161616" stroke-width="1"/><path d="M59.0 40.8L60.4 44.1L63.9 44.4L61.2 46.7L62.1 50.2L59.0 48.3L55.9 50.2L56.8 46.7L54.1 44.4L57.6 44.1Z" fill="#ffd23f" stroke="#161616" stroke-width="1"/></g>
+      <path d="M50 48 Q48 52 51 53" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="36" cy="54" r="3.2" fill="#ff5d73" opacity=".35"/><circle cx="64" cy="54" r="3.2" fill="#ff5d73" opacity=".35"/>
+      <circle cx="37" cy="52" r=".95" fill="#a0522d" opacity=".75"/><circle cx="40" cy="54" r=".95" fill="#a0522d" opacity=".75"/><circle cx="35" cy="55" r=".95" fill="#a0522d" opacity=".75"/><circle cx="63" cy="52" r=".95" fill="#a0522d" opacity=".75"/><circle cx="60" cy="54" r=".95" fill="#a0522d" opacity=".75"/><circle cx="65" cy="55" r=".95" fill="#a0522d" opacity=".75"/><path d="M42 55 Q50 65 58 55 Z" fill="#161616"/><path d="M45 58 Q50 62 55 58" fill="#ff8fa0"/><path d="M28 36 Q28 15 50 15 Q72 15 72 36Z" fill="#3d7bff" stroke="#161616" stroke-width="2"/><path d="M50 35 Q70 33 84 38 Q70 41 50 39Z" fill="#161616"/><circle cx="50" cy="16" r="2" fill="#161616"/>
+    </svg></div><b>Jayden</b><small>Your first fan. Still wants $50.</small></div>
+  </div>
+  <div class="pets"><div><svg viewBox="0 0 100 92" aria-hidden="true"><g class="ptail"><path d="M22 54 Q6 42 10 26" stroke="#161616" stroke-width="10" fill="none" stroke-linecap="round"/><path d="M22 54 Q6 42 10 26" stroke="#e0a458" stroke-width="5" fill="none" stroke-linecap="round"/></g>
+        <rect x="28" y="62" width="10" height="22" rx="4" fill="#e0a458" stroke="#161616" stroke-width="3" stroke-linejoin="round"/><rect x="56" y="62" width="10" height="22" rx="4" fill="#e0a458" stroke="#161616" stroke-width="3" stroke-linejoin="round"/>
+        <ellipse cx="46" cy="56" rx="28" ry="17" fill="#e0a458" stroke="#161616" stroke-width="3" stroke-linejoin="round"/><circle cx="72" cy="36" r="17" fill="#e0a458" stroke="#161616" stroke-width="3" stroke-linejoin="round"/>
+        <ellipse cx="84" cy="42" rx="9" ry="7" fill="#f6dcb0" stroke="#161616" stroke-width="2.5"/><circle cx="89" cy="38" r="3.4" fill="#161616"/>
+        <ellipse cx="62" cy="38" rx="6" ry="12" fill="#a8682e" stroke="#161616" stroke-width="3" stroke-linejoin="round" transform="rotate(22 62 38)"/><circle cx="75" cy="31" r="2.8" fill="#161616"/>
+        <path d="M80 48 Q81 57 86 53" fill="#ff7b93" stroke="#161616" stroke-width="2"/></svg>Biscuit</div><div><svg viewBox="0 0 100 92" aria-hidden="true"><path d="M42 66 L37 88 M58 66 L63 88" stroke="#3a2a2a" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M18 60 Q6 68 9 75 Q22 69 28 63Z" fill="#2a2a2a" stroke="#161616" stroke-width="2.5"/>
+        <ellipse cx="46" cy="55" rx="28" ry="16" fill="#f4f1ea" stroke="#161616" stroke-width="3" stroke-linejoin="round" transform="rotate(-10 46 55)"/>
+        <path d="M66 48 Q74 32 70 20" stroke="#161616" stroke-width="12" fill="none" stroke-linecap="round"/><path d="M66 48 Q74 32 70 20" stroke="#f4f1ea" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <circle cx="70" cy="18" r="8.5" fill="#2a2a2a" stroke="#161616" stroke-width="2.5"/>
+        <path d="M76 16 Q91 22 95 40" stroke="#161616" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <rect x="86" y="36" width="11" height="13" rx="2" fill="#ffd23f" stroke="#161616" stroke-width="2" transform="rotate(16 91 42)"/><circle cx="72.5" cy="16" r="1.8" fill="#fff"/></svg>Kevin the bin chicken</div></div>
+</div></section>
+
+</article>
+
+<section class="about" id="studio"><div class="wrap">
+  <span class="cube"><svg viewBox="0 0 200 200" class="lamsvg" aria-hidden="true">
+      <defs><clipPath id="lamCL"><polygon points="27,64 97,99 97,178 27,142"/></clipPath><clipPath id="lamCT"><polygon points="100,26 171,60 100,94 29,60"/></clipPath></defs>
+      <polygon points="24,60 100,98 100,182 24,144" fill="#5a2f1c" stroke="#120a06" stroke-width="5" stroke-linejoin="round"/>
+      <g clip-path="url(#lamCL)"><rect x="69.7" y="120.5" width="6.4" height="2.7" rx="1" fill="#fff6e4" transform="rotate(31 69.7 120.5)"/><rect x="64.0" y="103.0" width="5.5" height="3.0" rx="1" fill="#fff6e4" transform="rotate(85 64.0 103.0)"/><rect x="43.0" y="143.6" width="6.0" height="2.1" rx="1" fill="#fff6e4" transform="rotate(36 43.0 143.6)"/><rect x="62.1" y="136.7" width="5.4" height="1.6" rx="1" fill="#fff6e4" transform="rotate(85 62.1 136.7)"/><rect x="87.6" y="96.1" width="5.4" height="1.7" rx="1" fill="#fff6e4" transform="rotate(48 87.6 96.1)"/><rect x="28.7" y="77.9" width="6.1" height="2.4" rx="1" fill="#fff6e4" transform="rotate(5 28.7 77.9)"/><rect x="37.1" y="137.4" width="5.0" height="2.9" rx="1" fill="#fff6e4" transform="rotate(58 37.1 137.4)"/><rect x="58.2" y="80.2" width="3.2" height="2.5" rx="1" fill="#fff6e4" transform="rotate(107 58.2 80.2)"/><rect x="42.6" y="123.6" width="3.8" height="2.1" rx="1" fill="#fff6e4" transform="rotate(133 42.6 123.6)"/><rect x="89.3" y="135.3" width="3.8" height="2.1" rx="1" fill="#fff6e4" transform="rotate(53 89.3 135.3)"/><rect x="29.7" y="118.3" width="5.7" height="2.7" rx="1" fill="#fff6e4" transform="rotate(167 29.7 118.3)"/><rect x="30.7" y="142.6" width="4.7" height="3.1" rx="1" fill="#fff6e4" transform="rotate(25 30.7 142.6)"/><rect x="32.4" y="65.5" width="4.4" height="2.4" rx="1" fill="#fff6e4" transform="rotate(110 32.4 65.5)"/><rect x="92.4" y="100.7" width="5.9" height="3.1" rx="1" fill="#fff6e4" transform="rotate(50 92.4 100.7)"/><rect x="77.7" y="101.9" width="5.1" height="2.9" rx="1" fill="#fff6e4" transform="rotate(22 77.7 101.9)"/><rect x="99.7" y="145.1" width="6.7" height="2.3" rx="1" fill="#fff6e4" transform="rotate(104 99.7 145.1)"/><rect x="49.6" y="122.9" width="4.3" height="2.8" rx="1" fill="#fff6e4" transform="rotate(53 49.6 122.9)"/><rect x="58.2" y="147.9" width="5.8" height="3.2" rx="1" fill="#fff6e4" transform="rotate(160 58.2 147.9)"/><rect x="56.8" y="122.2" width="4.2" height="1.8" rx="1" fill="#fff6e4" transform="rotate(125 56.8 122.2)"/><rect x="47.8" y="137.9" width="6.6" height="1.7" rx="1" fill="#fff6e4" transform="rotate(86 47.8 137.9)"/><rect x="86.5" y="102.2" width="6.9" height="1.9" rx="1" fill="#fff6e4" transform="rotate(128 86.5 102.2)"/><rect x="77.2" y="105.3" width="4.7" height="1.9" rx="1" fill="#fff6e4" transform="rotate(118 77.2 105.3)"/><rect x="49.5" y="90.1" width="5.5" height="3.0" rx="1" fill="#fff6e4" transform="rotate(59 49.5 90.1)"/><rect x="84.2" y="123.1" width="3.5" height="3.0" rx="1" fill="#fff6e4" transform="rotate(67 84.2 123.1)"/><rect x="24.7" y="122.3" width="5.5" height="3.0" rx="1" fill="#fff6e4" transform="rotate(163 24.7 122.3)"/><rect x="39.9" y="118.7" width="5.0" height="1.9" rx="1" fill="#fff6e4" transform="rotate(9 39.9 118.7)"/><rect x="77.6" y="146.3" width="4.2" height="2.0" rx="1" fill="#fff6e4" transform="rotate(61 77.6 146.3)"/><rect x="26.2" y="79.7" width="7.0" height="2.5" rx="1" fill="#fff6e4" transform="rotate(178 26.2 79.7)"/><rect x="36.5" y="80.6" width="5.2" height="2.1" rx="1" fill="#fff6e4" transform="rotate(71 36.5 80.6)"/><rect x="57.0" y="111.6" width="5.7" height="2.2" rx="1" fill="#fff6e4" transform="rotate(61 57.0 111.6)"/><rect x="92.1" y="121.5" width="5.0" height="2.6" rx="1" fill="#fff6e4" transform="rotate(98 92.1 121.5)"/><rect x="68.8" y="102.2" width="4.3" height="2.1" rx="1" fill="#fff6e4" transform="rotate(58 68.8 102.2)"/><rect x="74.9" y="104.0" width="3.7" height="2.7" rx="1" fill="#fff6e4" transform="rotate(57 74.9 104.0)"/><rect x="33.5" y="91.1" width="3.2" height="2.5" rx="1" fill="#fff6e4" transform="rotate(37 33.5 91.1)"/></g>
+      <polygon points="100,98 176,60 176,144 100,182" fill="#3d1f12" stroke="#120a06" stroke-width="5" stroke-linejoin="round"/>
+      <polygon points="108,104 168,74 168,138 108,168" fill="#f5d48f"/>
+      <polygon points="108,128 168,98 168,112 108,142" fill="#e8344f"/>
+      <path d="M118 112 l3 0 M140 92 l4 1 M150 128 l3 -1 M126 150 l2 2 M156 86 l2 1" stroke="#d9b06a" stroke-width="3" stroke-linecap="round"/>
+      <polygon points="100,22 176,60 100,98 24,60" fill="#6b3a22" stroke="#120a06" stroke-width="5" stroke-linejoin="round"/>
+      <g clip-path="url(#lamCT)"><rect x="107.7" y="54.7" width="5.8" height="3.1" rx="1" fill="#fff6e4" transform="rotate(146 107.7 54.7)"/><rect x="121.7" y="44.6" width="6.5" height="2.4" rx="1" fill="#fff6e4" transform="rotate(151 121.7 44.6)"/><rect x="133.8" y="73.1" width="3.6" height="2.6" rx="1" fill="#fff6e4" transform="rotate(145 133.8 73.1)"/><rect x="86.2" y="44.7" width="5.2" height="3.2" rx="1" fill="#fff6e4" transform="rotate(89 86.2 44.7)"/><rect x="101.2" y="86.7" width="6.0" height="1.7" rx="1" fill="#fff6e4" transform="rotate(12 101.2 86.7)"/><rect x="74.4" y="47.7" width="5.7" height="2.8" rx="1" fill="#fff6e4" transform="rotate(178 74.4 47.7)"/><rect x="114.0" y="77.0" width="6.3" height="3.0" rx="1" fill="#fff6e4" transform="rotate(108 114.0 77.0)"/><rect x="92.7" y="52.3" width="6.5" height="2.7" rx="1" fill="#fff6e4" transform="rotate(63 92.7 52.3)"/><rect x="123.7" y="81.4" width="4.3" height="3.0" rx="1" fill="#fff6e4" transform="rotate(27 123.7 81.4)"/><rect x="126.3" y="36.7" width="3.3" height="2.6" rx="1" fill="#fff6e4" transform="rotate(131 126.3 36.7)"/><rect x="105.8" y="91.7" width="4.9" height="2.7" rx="1" fill="#fff6e4" transform="rotate(26 105.8 91.7)"/><rect x="110.2" y="37.7" width="3.2" height="2.1" rx="1" fill="#fff6e4" transform="rotate(79 110.2 37.7)"/><rect x="88.8" y="70.8" width="6.2" height="2.9" rx="1" fill="#fff6e4" transform="rotate(35 88.8 70.8)"/><rect x="111.3" y="67.0" width="4.8" height="2.4" rx="1" fill="#fff6e4" transform="rotate(83 111.3 67.0)"/><rect x="107.1" y="50.8" width="4.2" height="1.8" rx="1" fill="#fff6e4" transform="rotate(91 107.1 50.8)"/><rect x="80.0" y="52.3" width="5.2" height="2.6" rx="1" fill="#fff6e4" transform="rotate(79 80.0 52.3)"/><rect x="110.0" y="27.3" width="3.6" height="3.1" rx="1" fill="#fff6e4" transform="rotate(12 110.0 27.3)"/><rect x="133.5" y="71.4" width="5.0" height="1.8" rx="1" fill="#fff6e4" transform="rotate(148 133.5 71.4)"/><rect x="76.1" y="38.2" width="3.9" height="2.7" rx="1" fill="#fff6e4" transform="rotate(102 76.1 38.2)"/><rect x="33.7" y="62.3" width="6.0" height="2.7" rx="1" fill="#fff6e4" transform="rotate(143 33.7 62.3)"/><rect x="80.5" y="73.4" width="5.1" height="1.9" rx="1" fill="#fff6e4" transform="rotate(14 80.5 73.4)"/><rect x="102.8" y="27.9" width="4.1" height="2.7" rx="1" fill="#fff6e4" transform="rotate(120 102.8 27.9)"/><rect x="68.4" y="80.4" width="3.1" height="2.2" rx="1" fill="#fff6e4" transform="rotate(61 68.4 80.4)"/><rect x="58.3" y="64.5" width="5.1" height="1.9" rx="1" fill="#fff6e4" transform="rotate(170 58.3 64.5)"/><rect x="152.1" y="68.3" width="5.1" height="3.0" rx="1" fill="#fff6e4" transform="rotate(168 152.1 68.3)"/><rect x="108.8" y="69.6" width="6.2" height="2.1" rx="1" fill="#fff6e4" transform="rotate(89 108.8 69.6)"/><rect x="115.2" y="71.4" width="5.7" height="2.5" rx="1" fill="#fff6e4" transform="rotate(98 115.2 71.4)"/><rect x="98.7" y="96.1" width="6.1" height="2.1" rx="1" fill="#fff6e4" transform="rotate(114 98.7 96.1)"/><rect x="85.0" y="80.2" width="4.5" height="3.0" rx="1" fill="#fff6e4" transform="rotate(57 85.0 80.2)"/><rect x="135.5" y="71.1" width="4.4" height="2.5" rx="1" fill="#fff6e4" transform="rotate(151 135.5 71.1)"/></g>
+      <g class="lameyes"><ellipse cx="50" cy="104" rx="7" ry="9" fill="#fff"/><ellipse cx="78" cy="118" rx="7" ry="9" fill="#fff"/><circle cx="52" cy="106" r="4" fill="#120a06"/><circle cx="80" cy="120" r="4" fill="#120a06"/></g>
+      <path d="M52 128 Q64 140 78 134" stroke="#fff6e4" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <ellipse cx="40" cy="120" rx="6" ry="4" fill="#ff7b93" opacity=".7"/><ellipse cx="90" cy="140" rx="6" ry="4" fill="#ff7b93" opacity=".7"/>
+    </svg></span>
+  <div>
+    <div class="eyebrow" style="color:var(--lab)">About the lab</div>
+    <h2>Small studio. Big serves of silly.</h2>
+    <p>Lamington Labs is an independent studio from Australia. We make games that are easy to pick up, hard to put down and funny enough to screenshot. Every character, song and joke is made in-house, and every game runs happily on a cheap phone.</p>
+    <p>Clout Chaser is our first game. The next one is already in the oven.</p>
+    <div class="hand">Best served with a cuppa.</div>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Lamington Labs</span><span>Clout Chaser is a work of fiction. No real influencers were harmed.</span></div></footer>
+
+<script>
+(function(){
+  var root=document.documentElement; root.classList.add('js');
+  var calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine=matchMedia('(hover: hover) and (pointer: fine)').matches;
+  function $$(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));}
+
+  // scroll reveal
+  function mark(sel,cls,step){$$(sel).forEach(function(el,i){el.classList.add('rv');if(cls)el.classList.add(cls);if(step)el.style.setProperty('--d',(i%6)*step+'s');});}
+  mark('main section:not(.hero) h2, main section:not(.hero) .eyebrow, .lead, .back, .pitch, .gamehead .btns, .shots, .about p, .about .hand');
+  mark('.gcard','',.12); mark('.num','',.08); mark('.person','pop',.07); mark('.pets > div','pop',.15);
+  mark('.feat','right'); mark('.about .cube','left');
+  var counted=[];
+  function countUp(el){
+    var b=el.querySelector('b'); if(!b||calm)return; var n=parseInt(b.textContent,10); if(!(n>1))return;
+    var t0=null; b.textContent='0';
+    function f(t){t0=t0||t;var p=Math.min(1,(t-t0)/1100);b.textContent=Math.round(n*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f);}
+    requestAnimationFrame(f);
+  }
+  if('IntersectionObserver' in window && !calm){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');if(e.target.classList.contains('num'))countUp(e.target);io.unobserve(e.target);}});},{threshold:.15,rootMargin:'0px 0px -6% 0px'});
+    $$('.rv').forEach(function(el){io.observe(el);});
+  } else $$('.rv').forEach(function(el){el.classList.add('in');});
+
+  // header progress
+  var top=document.querySelector('.top'), ticking=false;
+  function onScroll(){ticking=false;var max=root.scrollHeight-innerHeight;top.style.setProperty('--sp',max>0?(scrollY/max).toFixed(4):0);top.classList.toggle('scrolled',scrollY>10);}
+  addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(onScroll);}},{passive:true}); onScroll();
+
+  // sprinkles
+  var sp=document.querySelector('.sprinkles');
+  if(sp&&!calm){var cols=['#fff6e4','#e8344f','#ffd23f','#3ddc97','#7cd3ff','#ff8fa3'];
+    for(var i=0;i<22;i++){var s=document.createElement('i');s.style.left=(Math.random()*100)+'%';
+      s.style.setProperty('--c',cols[i%cols.length]);s.style.setProperty('--t',(4+Math.random()*4).toFixed(2)+'s');
+      s.style.setProperty('--d',(-Math.random()*8).toFixed(2)+'s');s.style.setProperty('--x',(Math.random()*80-40).toFixed(0)+'px');
+      s.style.setProperty('--r',(Math.random()*720-360).toFixed(0)+'deg');sp.appendChild(s);}}
+
+  // tilt
+  if(fine&&!calm){
+    var box=document.querySelector('.cubebox');
+    if(box)addEventListener('pointermove',function(e){var x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;box.style.setProperty('--ry',(x*18).toFixed(2)+'deg');box.style.setProperty('--rx',(-y*14).toFixed(2)+'deg');},{passive:true});
+    $$('a.gcard').forEach(function(c){
+      c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+        c.classList.add('hot');c.style.setProperty('--ry',((x-.5)*10).toFixed(2)+'deg');c.style.setProperty('--rx',((.5-y)*8).toFixed(2)+'deg');
+        c.style.setProperty('--mx',(x*100)+'%');c.style.setProperty('--my',(y*100)+'%');});
+      c.addEventListener('pointerleave',function(){c.classList.remove('hot');c.style.setProperty('--rx','0deg');c.style.setProperty('--ry','0deg');});
+    });
+  }
+
+  // screenshot carousel
+  var strip=document.querySelector('.strip'), bar=document.querySelector('.prog i'), arrs=$$('.arr');
+  if(strip){
+    function upd(){var max=strip.scrollWidth-strip.clientWidth, w=Math.max(12,strip.clientWidth/strip.scrollWidth*100);
+      bar.style.setProperty('--w',w+'%');bar.style.setProperty('--l',(max>0?strip.scrollLeft/max*(100-w):0)+'%');
+      arrs[0].disabled=strip.scrollLeft<4; arrs[1].disabled=strip.scrollLeft>max-4;}
+    strip.addEventListener('scroll',function(){requestAnimationFrame(upd);},{passive:true}); addEventListener('resize',upd); upd();
+    arrs.forEach(function(b){b.addEventListener('click',function(){var f=strip.querySelector('figure');strip.scrollBy({left:(+b.dataset.dir)*(f.offsetWidth+18)*2,behavior:calm?'auto':'smooth'});});});
+    strip.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();arrs[e.key==='ArrowRight'?1:0].click();}});
+    var down=false,sx=0,sl=0,moved=0;
+    strip.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse')return;down=true;moved=0;sx=e.clientX;sl=strip.scrollLeft;});
+    addEventListener('pointermove',function(e){if(!down)return;var dx=e.clientX-sx;moved=Math.max(moved,Math.abs(dx));if(moved>4)strip.classList.add('drag');strip.scrollLeft=sl-dx;});
+    addEventListener('pointerup',function(){if(!down)return;down=false;if(strip.classList.contains('drag')){var f=strip.querySelector('figure'),st=f.offsetWidth+18;strip.classList.remove('drag');strip.scrollTo({left:Math.round(strip.scrollLeft/st)*st,behavior:'smooth'});}});
+  }
+})();
+</script>
+</body>
+</html>
